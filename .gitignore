@@ -1,0 +1,16 @@
+node_modules
+package-lock.json
+yarn.lock
+
+*.log
+
+*.DS_STORE
+
+*.Zone.Identifier
+
+tmp/uploads/*
+
+.env
+
+
+

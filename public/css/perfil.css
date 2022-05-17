@@ -1,0 +1,99 @@
+.box_account {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 80vh;
+    width: 100%;
+    background-color: #2e2e2e;
+}
+
+.account_left {
+    display: flex;
+    width: 50%;
+    height: 100%;
+}
+
+.account_right {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account_right h2 {
+    color: #f2f2f2;
+    margin-top: 10%;
+}
+
+.account_right .delete {
+    height: 10%;
+    width: 25%;
+    margin-top: 10%;
+    background-color: #c40233;
+    color: #f2f2f2;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.are_you_sure {
+    display: flex;
+    width: 100%;
+    height: 80%;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.btn_cancel {
+    height: 10%;
+    width: 25%;
+    margin-top: 10%;
+    background-color: #f2f2f2;
+    color: #121212;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.alterar_senha {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.titulo_senha {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.ipt_alterar_senha {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin-bottom: 5%;
+}
+
+.ipt_alterar_senha input {
+    width: 100%;
+    height: 20px;
+}
+
+.btn_salvar {
+    margin-top: 10%;
+    height: 10%;
+    width: 25%;
+    background-color: #3b83bd;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.5s;
+}

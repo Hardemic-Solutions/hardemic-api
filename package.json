@@ -1,0 +1,30 @@
+{
+  "name": "projeto-hardemic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "clean_rotinas:prod": "AMBIENTE_PROCESSO=producao node -p 'executar(`DELETE FROM tb_rotinas`)'",
+    "clean_rotinas:dev": "rm -rf tmp/uploads/*",
+    "dev": "npx nodemon --exec node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Feito pelos desenvolvedores @hardemic",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1135.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.17.1",
+    "mssql": "^7.1.3",
+    "multer": "^1.4.4",
+    "multer-s3": "^2.10.0",
+    "mysql2": "^2.2.5",
+    "path": "^0.12.7",
+    "socket.io": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

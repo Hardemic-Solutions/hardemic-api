@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu perfil</title>
+    <!-- link css -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/perfil.css">
+    <link rel="shortcut icon" href="assets/brain.jpg" type="image/x-icon">
+    <script src="js/login.js"></script>
+    <!-- CDN icons -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+</head>
+
+<body>
+    <div class="box_all">
+
+        <div class="navegation_bar">
+            <div class="box_bar">
+                <a href="./devices.html">Devices</a>
+                <i class="fi fi-rr-screen"></i>
+            </div>
+            <div class="box_bar">
+                <a href="./dashboard.html">Dash</a>
+                <i class="fi fi-rr-stats"></i>
+            </div>
+            <div class="box_bar">
+                <a href="./tickets.html">Tickets</a>
+                <i class="fi fi-rr-ticket"></i>
+            </div>
+            <div class="box_bar">
+                <a href="">Alertas</a>
+                <i class="fi fi-rr-bell"></i>
+            </div>
+            <div class="box_bar">
+                <a href="./rotinas.html">Rotinas</a>
+                <i class="fi fi-rr-calendar"></i>
+            </div>
+            <div class="box_bar">
+                <a href="./config.html">Configurações</a>
+                <i class="fi fi-rr-settings"></i>
+            </div>
+        </div>
+
+        <div class="box_chart">
+            <div class="header_bar">
+                <div class="container_left">
+
+                </div>
+                <div class="container_right">
+                    <i class="fi fi-sr-envelope"></i>
+                    <i onclick="meuPerfil()" class="fi fi-sr-user"></i>
+                </div>
+            </div>
+            <div class="tittle_devices">
+                <h1>
+                    Configurações da conta
+                </h1>
+            </div>
+            <div class="box_account">
+                <div class="account_left">
+                    <div class="alterar_senha">
+                        <h2 class="titulo_senha">
+                            Alterar Senha
+                        </h2>
+                        <div class="ipt_alterar_senha">
+                            <h4>Senha antiga:</h4>
+                            <input type="text" name="" id="ipt_senha_antiga" placeholder="Senha antiga">
+                        </div>
+
+                        <div class="ipt_alterar_senha">
+                            <h4>Nova senha:</h4>
+                            <input type="text" name="" id="ipt_senha_nova" placeholder="Nova senha">
+                        </div>
+                        
+                        <div class="ipt_alterar_senha">
+                            <h4>Confirme sua nova senha:</h4>
+                            <input type="text" name="" id="ipt_senha_nova_confirm" placeholder="Nova senha">
+                        </div>
+
+                        <button class="btn_salvar" onclick="alterarSenha()">Salvar Senha</button>
+                    </div>
+                </div>
+                <div class="account_right">
+                    <h2 id="tittle_delete">Deseja excluir sua conta?</h2>
+                    <button id="btn_delete" class="delete" onclick="deleteAcc()">Excluir conta</button>
+                    <div id="are_sure" style="display: none;" class="are_you_sure">
+                        <button onclick="cancel()" class="btn_cancel" >Cancelar</button>
+                        <button class="delete" onclick="deletar()">Excluir</button>
+                    </div>
+                </div>
+            </div>                
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    function  deleteAcc() {
+        tittle_delete.innerHTML = 'Você tem certeza?';
+        btn_delete.style.display = 'none';
+        are_sure.style.display = 'flex';
+    }
+
+    function cancel() {
+        tittle_delete.innerHTML = 'Deseja excluir sua conta?';
+        btn_delete.style.display = 'block';
+        are_sure.style.display = 'none';
+    }
+
+</script>

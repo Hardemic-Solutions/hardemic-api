@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CDN dos icones usados -->
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+  <!-- arquivos para estilização do html -->
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/./tickets.css">
+  <!-- arquivo para js da pagina -->
+  <script src="js/tickets.js"></script>
+  <!-- nome e icone do documento -->
+  <link rel="shortcut icon" href="./assets/brain.jpg" type="image/x-icon">
+  <title>Rotinas | Hardemic Solutions</title>
+
+</head>
+
+<body>
+  <div class="box_all">
+
+    <div class="navegation_bar">
+      <div class="box_bar">
+        <a href="./devices.html">Devices</a>
+        <i class="fi fi-rr-screen"></i>
+      </div>
+      <div class="box_bar">
+        <a href="./dashboard.html">Dash</a>
+        <i class="fi fi-rr-stats"></i>
+      </div>
+      <div class="box_bar">
+        <a href="./tickets.html">Tickets</a>
+        <i class="fi fi-rr-ticket"></i>
+      </div>
+      <div class="box_bar">
+        <a href="">Alertas</a>
+        <i class="fi fi-rr-bell"></i>
+      </div>
+      <div class="box_bar">
+        <a href="./rotinas.html">Rotinas</a>
+        <i class="fi fi-rr-calendar"></i>
+      </div>
+      <div class="box_bar">
+        <a href="./config.html">Configurações</a>
+        <i class="fi fi-rr-settings"></i>
+      </div>
+    </div>
+
+    <div class="box_chart">
+      <div class="header_bar">
+        <div class="container_left">
+
+        </div>
+        <div class="container_right">
+          <i class="fi fi-sr-envelope"></i>
+          <i onclick="meuPerfil()" class="fi fi-sr-user"></i>
+        </div>
+      </div>
+      <div class="tittle_devices">
+        <h1>
+          Tickets
+        </h1>
+      </div>
+      <div id="screen_tickets" class="banner_tickets">
+        <div class="tb_tickets">
+          <!-- tittle columns -->
+          <div class="tb_header">
+            <div class="box_header">
+              <h2>Device</h2>
+            </div>
+            <div class="box_header">
+              <h2>Status</h2>
+            </div>
+            <div class="box_header">
+              <h2>Situação</h2>
+            </div>
+            <div class="box_header">
+              <h2>Overview</h2>
+            </div>
+          </div>
+          <!-- rows devices  -->
+          <div class="rows_devices">
+            <div class="box_info_devices">
+              <h3>
+                Dev 12
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
+                On
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
+                Pendente
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>Detalhes...</h3>
+              <i onclick="showDesc()" class="fi fi-rr-info"></i>
+            </div>
+          </div>
+          <div class="rows_devices">
+            <div class="box_info_devices">
+              <h3>
+                Dev 15
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
+                Off
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
+                Andamento
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>Detalhes...</h3>
+              <i onclick="showDesc()" class="fi fi-rr-info"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="screen_desc" style="display:none;" class="banner_desc">
+        <div class="box_desc_device">
+          <div class="desc_header">
+            <i onclick="showTickets()" class="fi fi-rr-arrow-left"></i>
+            <h1>Status <div class="light_stats"></div>
+            </h1>
+            <h3>Device 12</h3>
+          </div>
+          <div class="desc_left">
+            <div class="column_left">
+              Tipo
+            </div>
+            <div class="column_left">
+              Local
+            </div>
+            <div class="column_left">
+              SO
+            </div>
+            <div class="column_left">
+              CPU
+            </div>
+            <div class="column_left">
+              Ram
+            </div>
+            <div class="column_left">
+              Disco
+            </div>
+          </div>
+          <div class="desc_right">
+            <div class="tittle_right">Logs</div>
+            <div class="logs_device">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

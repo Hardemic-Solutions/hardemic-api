@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="shortcut icon" href="./assets/brain.jpg" type="image/x-icon">
+</head>
+<body>
+
+    <header>
+        <div class="left">
+            <div class="name">
+                <span>
+                    Hardemic Solutions
+                    <img height="36px" src="./assets/brain.jpg" alt="Logo">
+                </span>
+            </div>
+        </div>
+        <div class="right">
+            <!-- &nbsp; -->
+            <button><a href="login.html">Voltar</a></button>
+        </div>
+    </header>
+
+    <div class="banner">
+        <div class="cadastro">
+
+            <div class="titulo">
+                Cadastro
+            </div>
+
+            <div class="ipts">
+
+                <div class="iptCadastro">
+                    Nome:
+                    <br>
+                    <input type="text" id="iptNome" placeholder="Nome">
+                </div>
+
+                <div class="iptCadastro">
+                    E-mail:
+                    <br>
+                    <input type="text" id="iptEmail" placeholder="E-mail">
+                </div>
+
+                <div class="iptCadastro">
+                    Senha:
+                    <br>
+                    <input type="password" id="iptSenha" placeholder="Senha">
+                </div>
+
+                <div class="iptCadastro">
+                    Confirme a senha:
+                    <br>
+                    <input type="password" id="iptConfirmaSenha" placeholder="Senha">
+                </div>
+
+            </div>
+
+            <button class="cadastrar" onclick="cadastrar()">Cadastrar</button>
+
+        </div>
+    </div>
+
+    <footer>
+        <h2>Todos os direitos reservados ©</h2>
+    </footer>
+
+</body>
+<script src="js/cadastro.js"></script>
+</html>

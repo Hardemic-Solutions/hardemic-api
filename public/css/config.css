@@ -1,0 +1,153 @@
+/* CSS rules are kept repetitive so that you can get CSS rules for each button easily :) */
+
+* {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*:focus {
+  outline: none;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background-color: #f1f9f9;
+}
+
+.box_dashboard {
+  margin-top: 20px;
+}
+
+.subtitles {
+  display: flex; 
+  justify-content: space-around;
+}
+
+.button-cover,
+.knobs,
+.layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-self: center;
+  justify-self: center;
+}
+
+.button {
+  /* position: relative;
+  top: 50%; */
+  width: 74px;
+  height: 36px;
+  margin: 0 auto 0 auto;
+  overflow: hidden;
+}
+
+.button.r,
+.button.r .layer {
+  border-radius: 100px;
+}
+
+.button.b2 {
+  border-radius: 2px;
+}
+
+.checkbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.knobs {
+  z-index: 2;
+}
+
+.layer {
+  width: 100%;
+  background-color: #dcdcdc;
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+
+/* Button 1 */
+.button-toogle .knobs:before {
+  content: " ";
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 20px;
+  height: 10px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+  padding: 9px 4px;
+  background-color: #03A062;
+  border-radius: 50%;
+  transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+}
+
+/* .button-toogle .checkbox:checked + .knobs:before {
+  content: " ";
+  left: 42px;
+  background-color: #f2f2f2;
+}
+
+.button-toogle .checkbox:checked ~ .layer {
+  background-color: #03A062;
+} */
+
+.button-toogle .checkbox:checked + .knobs:before {
+  content: " ";
+  left: 42px;
+  background-color: #f2f2f2;
+}
+
+.button-toogle .checkbox:checked ~ .layer {
+  background-color: #03A062;
+}
+
+.button-toogle .knobs,
+.button-toogle .knobs:before,
+.button-toogle .layer {
+  transition: 0.3s ease all;
+}
+
+.container_options {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: flex-start;
+  width: 50%;
+}
+
+.container_options .container_toogle {
+  display: flex; 
+  justify-content: space-between; 
+  margin-top: 20px; 
+  align-items: center;
+  padding: 0 40px;
+}
+
+.toogle {
+  position: relative;
+  width: 74px; 
+  height: 34px;
+}
+
+.btn_config {
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+  font-weight: 500;
+  border: none;
+  background-color: #03A062;
+  color: white;
+}

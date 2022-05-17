@@ -1,0 +1,158 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 1rem;
+}
+
+/* Estilização da header */
+
+header {
+    display: flex;
+    height: 15vh;
+    width: 100%;
+    background-color: #121212;
+}
+
+header .left {
+    display: flex;
+    height: 100%;
+    width: 50%;
+    align-items: center;
+}
+
+.name img {
+    display: flex;
+    height: 36px;
+    margin-left: 2%;
+}
+
+header .right {
+    display: flex;
+    height: 100%;
+    width: 50%;
+}
+
+.left .name {
+    width: 100%;
+    margin-left: 10%;
+    color: #03a062;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.left .name span {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.right button {
+    display: flex;
+    margin-right: 10%;
+    height: 40%;
+    width: max-content;
+    background-color: #03a062;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 10px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.right button:hover {
+    transform: scale(1.05);
+    background-color: #fff;
+    color: #03a062;
+}
+
+button:hover a {
+    color: #03a062;
+}
+
+header a{
+    text-decoration: none;
+    color: white;
+}
+
+/* Banner */
+
+.banner{
+    background-image: url(../assets/hardware\ 2.webp);
+    height: 70vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cadastro{
+    background-color: #121212;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90%;
+    width: 25%;
+    border-radius: 10%;
+}
+
+.cadastro .titulo{
+    margin-top: 10%;
+    font-size: xx-large;
+    font-weight: 400;
+}
+
+.ipts{
+    width: 90%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ipts .iptCadastro{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.cadastro .cadastrar{
+    margin-top: 5%;
+    background-color: #3B83BD;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 60px;
+    height: 8%;
+    width: 40%;
+    cursor: pointer;
+    transition: 00.5s;
+}
+
+.cadastrar:hover {
+    transform: scale(1.05);
+}
+
+/* footer */
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15vh;
+    background-color: #121212;
+    color: #fff;
+}

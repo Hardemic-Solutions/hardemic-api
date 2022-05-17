@@ -1,0 +1,239 @@
+.add_button {
+  height: 40%;
+  width: max-content;
+  background-color: #3b83bd;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 10px 40px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.5s;
+  align-self: flex-end;
+}
+
+.add_button:hover{
+  box-shadow: .5px .5px 4px #121212;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  margin-top: 20px;
+}
+
+.htable {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex: 1;
+}
+
+.htable span {
+  border: solid #D1CFD7;
+  border-width: 1px 0 1px 1px;
+  padding: 10px ;
+  background-color: #f2f2f2;
+}
+
+.htable span:last-child {
+  border-right-width: 1px;
+}
+
+.hbody {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.hrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: solid #f2f2f2 1px;
+  flex: 1;
+  align-items: center;
+}
+
+/* .hrow:nth-child(even) {
+  background: #f2f2f2;
+  border-color: #D1CFD7;
+  } 
+*/
+.hrow span {
+  border-right: solid #f2f2f2 1px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.hrow span button {
+  background-color: #f2f2f2;
+  outline: none;
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.hrow span button:hover {
+  box-shadow: .25px .25px 2px #121212;
+}
+
+.percent10 {
+  width: 10%;
+}
+
+.percent20 {
+  width: 20%;
+}
+
+.percent30 {
+  width: 30%;
+}
+
+.percent40 {
+  width: 40%;
+}
+
+.modal_rotina {
+  z-index: 999;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  top: 0;
+  visibility: hidden;
+}
+
+.modal_rotina.active {
+  opacity: 1;
+  visibility: visible;
+  transition: 0.8s;
+  display: block;
+}
+
+.modal {
+  display: flex;
+  background: #f2f2f2;
+  position: relative;
+  height: 100%;
+  width: 90%;
+  max-width: 75%;
+  max-height: 90%;
+  z-index: 1;
+  border-radius: 0.75rem;
+  flex-direction: column;
+  margin-top: 2.5%;
+}
+
+.header_modal {
+  display: flex;
+  height: 5%;
+  width: 100%;
+  justify-content: end;
+}
+
+.header_modal i {
+  margin: 2% 2% 0 0;
+  font-size: 17px;
+  cursor: pointer;
+  color: #121212;
+}
+
+.header_tittle {
+  display: flex;
+  height: 5%;
+  width: 100%;
+  justify-content: center;
+}
+
+.modal .container {
+  align-self: center;
+  max-width: 60%;
+}
+
+.modal .container .groupinput{
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  margin-top: 20px;
+  max-width: 300px;
+}
+
+.modal .container .groupinput label {
+  font-size: 14px;
+  margin: 0 0 5px 5px;
+}
+
+.modal .container .groupinput input {
+  outline: none;
+  border: none;
+  background-color: #F6F6FA;
+  height: 35px;
+  font-size: 16px;
+  padding: 0 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.modal .container .groupinput span {
+  height: 35px;
+  flex: 1;
+}
+
+.modal .container .groupinput span label {
+  margin: 0 0 5px 5px;
+  display: flex;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="file"]{
+  visibility: hidden;
+}
+
+.modal .container .groupinput label.upload {
+  outline: none;
+  border: none;
+  background-color: #F6F6FA;
+  height: 35px;
+  font-size: 16px;
+  border-radius: 20px;
+  text-transform: lowercase;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 100%!important;
+  cursor: pointer;
+}
+
+label.upload:hover {
+  box-shadow: .25px .25px 2px #121212;
+}
+
+.modal .container .groupinput textarea {
+  outline: none;
+  border: none;
+  background-color: #F6F6FA;
+  font-size: 16px;
+  padding: 0 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  resize: vertical;
+}
+

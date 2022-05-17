@@ -1,0 +1,432 @@
+* {
+    box-sizing: border-box;
+    transition: 0.6s;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 1rem;
+}
+
+/* Estilização da header */
+
+.header {
+    display: flex;
+    height: 15vh;
+    width: 100%;
+    background-color: #121212;
+}
+
+.header .left {
+    display: flex;
+    height: 100%;
+    width: 50%;
+    align-items: center;
+}
+
+.name img {
+    display: flex;
+    height: 36px;
+    margin-left: 2%;
+}
+
+.header .right {
+    display: flex;
+    height: 100%;
+    width: 50%;
+}
+
+.left .name {
+    width: 100%;
+    margin-left: 10%;
+    color: #03a062;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.left .name span {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.right button {
+    box-sizing: border-box;
+    display: flex;
+    margin-right: 10%;
+    height: 40%;
+    width: max-content;
+    background-color: #03a062;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: large;
+    font-weight: bold;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background-color: #fff;
+    color: #03a062;
+}
+
+button:hover a {
+    color: #03a062;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+/* Estilização banner */
+
+.banner {
+    display: flex;
+    height: 85vh;
+    width: 100%;
+    background-color: #03a062;
+    justify-content: center;
+}
+
+.banner .bannerimage {
+    display: flex;
+    height: 85%;
+    width: 80%;
+    align-self: center;
+    background-image: url(../assets/hardware.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 15px;
+}
+
+.bannerimage {
+    display: flex;
+    align-items: flex-start;
+}
+
+.bannerimage .bannertext {
+    display: flex;
+    margin: 2.0rem 0 0 2.0rem;
+    height: max-content;
+    width: 50%;
+    border-radius: 15px;
+    background-color: #121212;
+    opacity: 0.9;
+}
+
+.bannertext {
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    color: #fff;
+}
+
+.bannertext h1 {
+    display: flex;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+/* Estilização da segunda parte do banner */
+
+.blackrow {
+    display: flex;
+    height: 7.5vh;
+    background-color: #121212;
+    align-items: center;
+    justify-content: center;
+}
+
+.greenrow {
+    display: flex;
+    height: 7.5vh;
+    background-color: #03a062;
+    align-items: center;
+    justify-content: center;
+}
+
+.greenrow h1 {
+    display: flex;
+    color: #fff;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.banner2 {
+    display: flex;
+    flex-direction: column;
+    background-color: #121212;
+    height: 85vh;
+}
+
+.banner2 button {
+    display: flex;
+    align-self: center;
+    height: 10%;
+    width: max-content;
+    border-radius: 15px;
+    background-color: #03a062;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.banner2 button:hover {
+    transform: scale(1.05);
+    background-color: #fff;
+    color: #03a062;
+}
+
+.banner2 .container {
+    display: flex;
+    width: 100%;
+    height: 80%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container .box {
+    display: flex;
+    height: 55%;
+    width: 25%;
+    background-color: #03a062;
+    border-radius: 15px;
+}
+
+.box {
+    flex-direction: column;
+    padding-left: 1%;
+    padding-right: 1%;
+    color: #fff;
+}
+
+.box:hover {
+    transform: scale(1.025);
+}
+
+.box h1 {
+    display: flex;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+}
+
+.box p {
+    font-size: large;
+}
+
+/* Estilização sobre nós */
+
+.blackrow h1 {
+    display: flex;
+    color: #fff;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.aboutus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+    background-color: #03a062;
+    padding: 2%;
+}
+
+.aboutus .abusimage {
+    display: flex;
+    height: 100%;
+    width: 85%;
+    background-image: url(../assets/hardware\ 2.webp);
+    background-repeat: no-repeat;
+    /* background-size: 100% 100%; */
+    border-radius: 15px;
+}
+
+.abusimage {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.abusimage .boxus {
+    display: flex;
+    height: 90%;
+    width: 40%;
+    background-color: #121212;
+    border-radius: 15px;
+    opacity: 0.9;
+}
+
+.boxus {
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+}
+
+.boxus h1 {
+    display: flex;
+    align-self: center;
+    font-weight: bold;
+    font-size: xx-large;
+    color: #fff;
+}
+
+.boxus p {
+    display: flex;
+    align-self: center;
+    text-align: justify;
+    font-weight: bold;
+    color: #fff;
+    font-size: 1.15rem;
+}
+
+/* footer */
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15vh;
+    background-color: #121212;
+    color: #fff;
+}
+
+.footer h2 {
+    font-size: larger;
+}
+
+@media screen and (max-width: 1475px) {
+
+    .header {
+        justify-content: space-evenly;
+    }
+
+    .header img {
+        display: none;
+    }
+
+    .left .name  {
+        font-size: larger;
+    }
+
+    .right button {
+        font-size: medium;
+    }
+
+    .banner .bannerimage {
+        height: 65%;
+        width: 90%;
+    }
+
+    .bannerimage {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bannerimage .bannertext {
+        margin: 0;
+        width: 80%;
+    }
+
+    .bannertext h1 {
+        display: flex;
+        justify-content: center;
+        font-size: large;
+        text-align: center;
+    }
+
+    .bannertext p {
+        display: flex;
+        text-align: center;
+        font-size: large;  
+    }
+
+    .greenrow h1 {
+        font-size: large;
+    }
+
+    .blackrow h1 {
+        font-size: large;
+    }
+
+    .banner2 {
+        height: max-content;
+        padding: 40px 0;
+    }
+
+    .banner2 .container {
+        flex-direction: column;
+    }
+
+    .banner2 button {
+        font-size: large;
+        padding: 1.0rem;
+    }
+
+    .container .box {
+        margin-bottom: 1.0rem;
+        width: 60%;
+    }
+
+    .box h1 {
+        font-size: large;
+        justify-content: center;
+    }
+
+    .box p {
+        font-size: medium;
+        text-align: center;
+    }
+    
+    .aboutus {
+        height: max-content;
+    }
+
+    .aboutus .abusimage {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 85%;
+        padding: 40px 0;
+    }
+
+    .abusimage .boxus {
+        margin-bottom: 1.0rem;
+        width: 90%;
+    }
+
+    .boxus h1 {
+        font-weight: 500;
+        font-size: large;
+    }
+
+    .boxus p {
+        font-weight: 500;
+        font-size: medium;
+    }
+
+    .footer h2 {
+        font-size: large;
+    }
+
+}

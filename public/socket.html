@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="problema()">problema</button>
+    <br><br>
+    <button onclick="pegardados()">pegar_dados</button>
+    <br><br>
+    <input type="text" id="ipthostname">
+</body>
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" 
+crossorigin="anonymous"></script>
+<script>
+
+const socket = io('http://localhost:3333');
+function problema(){
+    socket.emit('problema', ipthostname.value);
+};
+function pegardados(){
+    socket.emit('pegar_dados', ipthostname.value)
+};
+
+</script>
+</html>

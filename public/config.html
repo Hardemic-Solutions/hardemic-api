@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CDN dos icones usados -->
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+  <!-- arquivos para estilização do html -->
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/config.css">
+  <!-- nome e icone do documento -->
+  <link rel="shortcut icon" href="./assets/brain.jpg" type="image/x-icon">
+  <title>Configurações | Hardemic Solutions</title>
+
+</head>
+
+<body>
+  <div class="box_all">
+
+    <div class="navegation_bar">
+      <div class="box_bar">
+        <a href="./devices.html">Devices</a>
+        <i class="fi fi-rr-screen"></i>
+      </div>
+      <div class="box_bar">
+        <a href="./dashboard.html">Dash</a>
+        <i class="fi fi-rr-stats"></i>
+      </div>
+      <div class="box_bar">
+        <a href="./tickets.html">Tickets</a>
+        <i class="fi fi-rr-ticket"></i>
+      </div>
+      <div class="box_bar">
+        <a href="">Alertas</a>
+        <i class="fi fi-rr-bell"></i>
+      </div>
+      <div class="box_bar">
+        <a href="./rotinas.html">Rotinas</a>
+        <i class="fi fi-rr-calendar"></i>
+      </div>
+      <div class="box_bar">
+        <a href="#">Configurações</a>
+        <i class="fi fi-rr-settings"></i>
+      </div>
+    </div>
+
+    <div class="box_chart">
+      <div class="header_bar">
+        <div class="container_left">
+
+        </div>
+        <div class="container_right">
+          <i class="fi fi-sr-envelope"></i>
+          <i onclick="meuPerfil()" class="fi fi-sr-user"></i>
+        </div>
+      </div>
+      <div class="tittle_devices">
+        <h1>
+          Configurações
+        </h1>
+      </div>
+      <div class="box_dashboard">
+        <div class="subtitles">
+
+          <h2>Notificações</h2>
+
+          <h2>Recursos monitorados</h2>
+
+        </div>
+
+        <div style="display: flex; flex-direction: row; justify-content: space-around;">
+
+          <div class="container_options">
+            <div class="container_toogle">
+              <h3>Alertas de ameaças</h3>
+              <div class="container toogle">
+                <div class="button r button-toogle">
+                  <input type="checkbox" class="checkbox" />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="container_toogle">
+              <h3>Alertas de atenção</h3>
+              <div class="container toogle">
+                <div class="button r button-toogle">
+                  <input type="checkbox" class="checkbox" />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container_toogle">
+              <span>
+                <h3>Alertas de recursos</h3>
+              </span>
+
+              <div class="container toogle">
+                <div class="button r button-toogle">
+                  <input type="checkbox" class="checkbox" />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container_toogle">
+              <h3>Tickets novos</h3>
+              <div class="container toogle">
+                <div class="button r button-toogle">
+                  <input type="checkbox" class="checkbox" />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container_toogle">
+              <h3>Lembrete de tickets pendentes</h3>
+              <div class="container toogle">
+                <div class="button r button-toogle">
+                  <input type="checkbox" class="checkbox" />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container_toogle">
+              <h3>Rotina executada</h3>
+              <div class="container toogle">
+                <div class="button r button-toogle">
+                  <input type="checkbox" class="checkbox" />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Segunda section -->
+
+          <div class="container_options">
+            <div class="container_toogle">
+              <h3>CPU</h3>
+              <div class="container toogle">
+                <div class="button r button-toogle">
+                  <input type="checkbox" class="checkbox" />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="container_toogle">
+              <h3>RAM</h3>
+              <div class="container toogle">
+                <div class="button r button-toogle">
+                  <input type="checkbox" class="checkbox" />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container_toogle">
+              <span>
+                <h3>Disco</h3>
+              </span>
+
+              <div class="container toogle">
+                <div class="button r button-toogle">
+                  <input type="checkbox" class="checkbox" />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container_toogle">
+              <h3>Processos</h3>
+              <div class="container toogle">
+                <div class="button r button-toogle">
+                  <input type="checkbox" class="checkbox" />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container_toogle">
+              <h3>Temperatura</h3>
+              <div class="container toogle">
+                <div class="button r button-toogle">
+                  <input type="checkbox" class="checkbox" />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container_toogle">
+              <h3>Métricas</h3>
+              <div class="container toogle">
+                <button onclick="configurar()" class="btn_config">Configurar</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  window.onload = () => {
+    document.querySelectorAll('.checkbox').forEach(check => check.checked = true)
+  }
+
+  function meuPerfil() {
+    window.location = 'perfil.html';
+  }
+
+  function configurar() {
+    window.location = 'metricas.html'
+  }
+</script>
