@@ -12,12 +12,14 @@
     href="https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css" />
   <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css" />
   <!-- arquivos para estilização do html -->
-  <link rel="stylesheet" href="css/global.css" />
-  <link rel="stylesheet" href="css/devices.css" />
+  <link rel="stylesheet" href="./css/global.css" />
+  <link rel="stylesheet" href="./css/devices.css" />
   <!-- arquivo para js da pagina -->
+
   <script src="js/devices.js"></script>
   <script src="js/global.js"></script>
   <!-- nome e icone do documento -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
   <link rel="shortcut icon" href="assets/brain.jpg" type="image/x-icon" />
   <title>Devices | Hardemic Solutions</title>
 </head>
@@ -80,8 +82,8 @@
           <canvas class="line-chart1"></canvas>
         </div>
         <div style="display: none" id="dashBottom" class="dash_bottom">
-          <canvas class="line-chart2"></canvas>
-          <canvas class="line-chart3"></canvas>
+          <canvas id="line-chart2"></canvas>
+          <canvas id="line-chart3"></canvas>
         </div>
         <!-- tela add device -->
         <div id="dashAdd" style="display: none" class="add_box">
@@ -171,10 +173,11 @@
       </div>
     </div>
 
-    <!-- CDN do ChartJS -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-    -
+
   </div>
+
 </body>
 <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"
   integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
@@ -262,6 +265,7 @@
 
   window.onload = function () {
     renderizarDevices();
+    rendezarizargraficoCpu();
   };
 
   // type, data e options
@@ -270,11 +274,10 @@
 
   function atualizargraficoCpu() {
     fetch("/usuarios/dadosgraph1", {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
-      },
-      body: JSON.stringify({}),
+      }
     })
       .then(function (resposta) {
         console.log("ESTOU NO THEN DO entrar()!");
@@ -285,7 +288,11 @@
           resposta.json().then((json) => {
             console.log(json);
             console.log(JSON.stringify(json));
-            yValue1.push(json.CPU);
+            yValue1.shift();
+            yValue1.push(json.map(obj => obj.cpu).slice(-1));
+
+            window.chart1.update();
+            setTimeout(() => atualizargraficoCpu(), 2000)
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
@@ -322,6 +329,123 @@
     });
     setTimeout(() => atualizargraficoCpu(), 2000);
   }
+
+  // function graficoRam() {
+  //   fetch("/usuarios/dadosgraph2", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({}),
+  //   })
+  //     .then(function (resposta) {
+  //       console.log("ESTOU NO THEN DO entrar()!");
+
+  //       if (resposta.ok) {
+  //         console.log(resposta);
+
+  //         resposta.json().then((json) => {
+  //           console.log(json);
+  //           console.log(JSON.stringify(json));
+  //           yValue2.push(json.RAM);
+  //         });
+  //       } else {
+  //         console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+
+  //         resposta.text().then((texto) => {
+  //           console.error(texto);
+  //         });
+  //       }
+  //     })
+  //     .catch(function (erro) {
+  //       console.log(erro);
+  //     });
+
+  //   return false;
+  // }
+
+  // ////// grafico ram
+
+  // function grafiRam() {
+  //   new Chart("line-chart2", {
+  //     type: "doughnut",
+  //     data: {
+  //       labels: ["Usada", "Livre"],
+  //       datasets: [
+  //         {
+  //           label: "RAM",
+  //           data: yValue2,
+  //           borderWidth: 20,
+  //           borderColor: "#7F13A1",
+  //           backgroundColor: "#7F13A1",
+  //           responsive: true,
+  //           maintainAspectRatio: false,
+  //         },
+  //       ],
+  //     },
+  //   });
+  // }
+  // // setTimeout(() => grafiRam(), 2000);
+
+  // ////// grafico disco
+
+  // function graficoDisco() {
+  //   fetch("/usuarios/dadosgraph3", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({}),
+  //   })
+  //     .then(function (resposta) {
+  //       console.log("ESTOU NO THEN DO entrar()!");
+
+  //       if (resposta.ok) {
+  //         console.log(resposta);
+
+  //         resposta.json().then((json) => {
+  //           console.log(json);
+  //           console.log(JSON.stringify(json));
+  //           yValue3.push(json.DISCO);
+  //         });
+  //       } else {
+  //         console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+
+  //         resposta.text().then((texto) => {
+  //           console.error(texto);
+  //         });
+  //       }
+
+  //     }).catch(function (erro) {
+  //       console.log(erro);
+  //     })
+
+  //   return false;
+  // }
+
+  // function graficoDisco() {
+  //   window.chart3 = new Chart("line-chart3", {
+  //     type: 'doughnut',
+  //     labels: ["Usada", "Livre"],
+  //     datasets: [{
+  //       label: "Disco",
+  //       data: yValue3,
+  //       borderWidth: 20,
+  //       borderColor: '#7F13A1',
+  //       backgroundColor: '#7F13A1',
+  //       responsive: true,
+  //       maintainAspectRatio: false
+  //     }]
+  //   });
+
+
+
+  // }
+
+  // setTimeout(() => {
+  //   graficoDisco();
+  //   window.chart3.update()
+  // }, 2000);
 
 
   // function graficoRam() {
