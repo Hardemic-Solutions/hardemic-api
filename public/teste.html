@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste dash</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
+</head>
+
+<body>
+  <h1>Testando</h1>
+  <div>
+    <canvas class="line-chart1"></canvas>
+  </div>
+</body>
+
+</html>
+<script>
+  const yValue1 = [];
+  let labels = [];
+  let counterIndex = 0;
+
+  const ctx = document.getElementsByClassName("line-chart1");
+
+
+  function atualizargraficoCpu() {
+    fetch("/usuarios/dadosgraph1", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!");
+
+        if (resposta.ok) {
+          // console.log(resposta);
+
+          resposta.json().then((json) => {
+            // console.log(json);
+            // console.log(JSON.stringify(json));
+            // yValue1.shift();
+            if (labels.length >= 6) {
+              labels.shift();
+            }
+
+            if (yValue1.length >= 6) {
+              yValue1.shift()
+            }
+
+            labels.push(counterIndex++)
+            yValue1.push(json.map(obj => obj.cpu).at(-1))
+            // yValue1.push(Math.random() * 10);
+
+            window.chart1.update();
+            setTimeout(() => atualizargraficoCpu(), 2000)
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+
+          resposta.text().then((texto) => {
+            console.error(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+
+    return false;
+  }
+
+  function rendezarizargraficoCpu() {
+    fetch("/usuarios/dadosgraph1", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!");
+
+        if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then((json) => {
+            // console.log(json);
+            json.forEach(obj => {
+              labels.push(counterIndex++);
+              yValue1.push(obj.cpu);
+            });
+            // yValue1.push([85, 96, 98, 95]);
+            // console.log(JSON.stringify(json));
+            var ctx = document.getElementsByClassName("line-chart1")[0].getContext("2d");;
+            window.chart1 = new Chart(ctx, {
+              type: "line",
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    label: "Desempenho CPU",
+                    data: yValue1,
+                    borderWidth: 6,
+                    borderColor: "#7F13A1",
+                    backgroundColor: "#ccc",
+                    maintainAspectRatio: false,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                animation: { duration: 1000 },
+                hoverMode: 'index',
+                stacked: false,
+                title: {
+                  display: false,
+                  text: ''
+                },
+                scales: {
+                  yAxes: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    ticks: {
+                      beginAtZero: true,
+                      max: 100,
+                      min: 0
+                    }
+                  }
+
+                }
+
+              }
+            });
+            setTimeout(() => atualizargraficoCpu(), 2000);
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+
+          resposta.text().then((texto) => {
+            console.error(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+
+
+  }
+
+  rendezarizargraficoCpu()
+</script>
