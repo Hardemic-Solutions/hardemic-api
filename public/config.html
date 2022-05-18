@@ -13,6 +13,8 @@
   <!-- arquivos para estilização do html -->
   <link rel="stylesheet" href="./css/global.css">
   <link rel="stylesheet" href="./css/config.css">
+  <!-- arquivos js -->
+  <script src="js/global.js"></script>
   <!-- nome e icone do documento -->
   <link rel="shortcut icon" href="./assets/brain.jpg" type="image/x-icon">
   <title>Configurações | Hardemic Solutions</title>
@@ -23,28 +25,24 @@
   <div class="box_all">
 
     <div class="navegation_bar">
-      <div class="box_bar">
-        <a href="./devices.html">Devices</a>
+      <div onclick="goToDevices()" class="box_bar">
+        <a>Devices</a>
         <i class="fi fi-rr-screen"></i>
       </div>
-      <div class="box_bar">
-        <a href="./dashboard.html">Dash</a>
+      <div onclick="goToDash()" class="box_bar">
+        <a>Dash</a>
         <i class="fi fi-rr-stats"></i>
       </div>
-      <div class="box_bar">
-        <a href="./tickets.html">Tickets</a>
+      <div onclick="goToTickets()" class="box_bar">
+        <a>Tickets</a>
         <i class="fi fi-rr-ticket"></i>
       </div>
-      <div class="box_bar">
-        <a href="">Alertas</a>
-        <i class="fi fi-rr-bell"></i>
-      </div>
-      <div class="box_bar">
-        <a href="./rotinas.html">Rotinas</a>
+      <div onclick="goToRotinas()" class="box_bar">
+        <a>Rotinas</a>
         <i class="fi fi-rr-calendar"></i>
       </div>
-      <div class="box_bar">
-        <a href="#">Configurações</a>
+      <div onclick="goToConfig()" class="box_bar">
+        <a>Configurações</a>
         <i class="fi fi-rr-settings"></i>
       </div>
     </div>
@@ -55,8 +53,8 @@
 
         </div>
         <div class="container_right">
-          <i class="fi fi-sr-envelope"></i>
           <i onclick="meuPerfil()" class="fi fi-sr-user"></i>
+          <i class="fi fi-rr-sign-out"></i>
         </div>
       </div>
       <div class="tittle_devices">
@@ -229,10 +227,6 @@
 <script>
   window.onload = () => {
     document.querySelectorAll('.checkbox').forEach(check => check.checked = true)
-  }
-
-  function meuPerfil() {
-    window.location = 'perfil.html';
   }
 
   function configurar() {

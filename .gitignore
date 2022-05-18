@@ -1,8 +1,10 @@
-node_modules
-package-lock.json
-yarn.lock
-
+# Log file
 *.log
+
+node_modules
+
+*lock.json
+
 
 *.DS_STORE
 
@@ -11,6 +13,3 @@ yarn.lock
 tmp/uploads/*
 
 .env
-
-
-

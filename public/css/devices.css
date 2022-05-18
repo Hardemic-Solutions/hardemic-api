@@ -323,10 +323,12 @@
 .btn_modal {
     height: 60%;
     width: 80%;
+    margin: 0 0.5rem ;
     font-size: 12px;
     background-color: #3b83bd;
     color: white;
     border-radius: 15px;
+    border: none;
 }
 
 /* estilização modal editar */
@@ -368,109 +370,4 @@
     display: flex;
     height: 90%;
     width: 100%;
-}
-
-/* estilização modal delete */
-
-.modal_delete {
-    z-index: 999;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    top: 0;
-    visibility: hidden;
-}
-
-.modal_delete.active {
-    opacity: 1;
-    visibility: visible;
-    transition: 0.8s;
-}
-
-.modal_deletar {
-    background: #000000;
-    position: relative;
-    height: 60%;
-    width: 50%;
-    max-width: 75%;
-    max-height: 90%;
-    z-index: 1;
-    border-radius: 0.75rem;
-    color: white;
-    flex-direction: column;
-}
-
-/* estilização modal add sala */
-
-.modal_addSala {
-    z-index: 999;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    top: 0;
-    visibility: hidden;
-}
-
-.modal_addSala.active {
-    opacity: 1;
-    visibility: visible;
-    transition: 0.8s;
-}
-
-.modal_adicionarSala {
-    background: #000000;
-    position: relative;
-    height: 60%;
-    width: 50%;
-    max-width: 75%;
-    max-height: 90%;
-    z-index: 1;
-    border-radius: 0.75rem;
-    color: white;
-    flex-direction: column;
-}
-
-/* estilização modal delete sala */
-
-.modal_deleteSala {
-    z-index: 999;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    top: 0;
-    visibility: hidden;
-}
-
-.modal_deleteSala.active {
-    opacity: 1;
-    visibility: visible;
-    transition: 0.8s;
-}
-
-.modal_deletarSala {
-    background: #000000;
-    position: relative;
-    height: 60%;
-    width: 50%;
-    max-width: 75%;
-    max-height: 90%;
-    z-index: 1;
-    border-radius: 0.75rem;
-    color: white;
-    flex-direction: column;
 }
