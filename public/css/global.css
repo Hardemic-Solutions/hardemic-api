@@ -10,6 +10,7 @@
 
 .navegation_bar {
     display: flex;
+    box-sizing: border-box;
     height: 100vh;
     width: 20%;
     background-color: #121212;
@@ -20,18 +21,22 @@
 
 .box_bar {
     display: flex;
+    box-sizing: border-box;
     padding: 0 5% 0 5%;
+    height: 10%;
     width: 70%;
+    align-items: center;
     justify-content: space-between;
-    font-size: x-large;
-    font-weight: bold;
+    font-size: large;
+    font-weight: 400;
     color: #f2f2f2;
-    transition: 0.5s;
     cursor: pointer;
 }
 
 .box_bar:hover {
     transform: scale(1.1);
+    border: solid 1px #03A062;
+    border-radius: 15px;
 }
 
 a {
