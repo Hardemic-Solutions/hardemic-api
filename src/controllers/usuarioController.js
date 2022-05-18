@@ -176,6 +176,7 @@ function graficoCpu(req, res) {
         );
 
 
+
 }
 function graficoRam(req, res) {
 

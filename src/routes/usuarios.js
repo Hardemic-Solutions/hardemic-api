@@ -34,6 +34,7 @@ router.get("/dadosgraph2", function (req, res) {
     usuarioController.graficoDisco(req, res);
 });
 router.get("/dadosgraph3", function (req, res) {
+
     usuarioController.graficoRam(req, res);
 });
 
