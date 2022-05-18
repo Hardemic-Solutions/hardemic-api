@@ -44,11 +44,43 @@ function deletar(idUsuario) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+function graficoCpu() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function graficoCpu(): ")
+    var instrucao = `select 
+	cpu,
+	FORMAT(data_log,'dd/MM/yyyy hh:mm:ss'),
+    fk_computador from  
+    tb_logs
+    where fk_computador = ${3}
+    order by id_log
+    desc OFFSET 0 ROWS
+    FETCH NEXT 6 ROWS ONLY;`
+    console.log("Executando a instrução (SELECT) SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
+function graficoRam() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function graficoRam(): ")
+    var instrucao = `
+    SELECT ram FROM tb_logs  AS 'RAM'; `
+    console.log("Executando a instrução (SELECT) SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function graficoDisco() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function graficoDisco(): ")
+    var instrucao = `
+    SELECT disco FROM tb_logs  AS 'DISCO'; `
+    console.log("Executando a instrução (SELECT) SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 module.exports = {
     entrar,
     cadastrar,
     listar,
     alterarSenha,
-    deletar
+    deletar,
+    graficoCpu,
+    graficoRam,
+    graficoDisco
 };
