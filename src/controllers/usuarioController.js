@@ -150,11 +150,99 @@ function deletar(req, res) {
 
 }
 
+function graficoCpu(req, res) {
+    // var idComputador = req.params.idComputador;
+
+    usuarioModel.graficoCpu()
+        .then(
+
+       
+            function (resultado) {
+                console.log(`\nResultados encontrados: ${resultado.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+                if (resultado) {
+                    console.log(resultado);
+                    res.json(resultado);
+                }else{
+                    res.send("sem resultado")
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+
+}
+function graficoRam(req, res) {
+
+
+    usuarioModel.graficoRam()
+        .then(
+            function (resultado) {
+                console.log(`\nResultados encontrados: ${resultado.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+                if (resultado.length == 1) {
+                    console.log(resultado);
+                    res.json(resultado[0]);
+                } else if (resultado.length == 0) {
+                    res.status(403).send("Email e/ou senha inválido(s)");
+                } else {
+                    res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+
+}
+function graficoDisco(req, res) {
+
+
+    usuarioModel.graficoDisco()
+        .then(
+            function (resultado) {
+                console.log(`\nResultados encontrados: ${resultado.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+                if (resultado.length == 1) {
+                    console.log(resultado);
+                    res.json(resultado[0]);
+                } else if (resultado.length == 0) {
+                    res.status(403).send("Email e/ou senha inválido(s)");
+                } else {
+                    res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
     testar,
     alterarSenha,
-    deletar
+    deletar,
+    graficoCpu,
+    graficoRam,
+    graficoDisco
 }
