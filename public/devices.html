@@ -17,6 +17,7 @@
   <!-- arquivo para js da pagina -->
   <script src="./js/devices.js"></script>
   <!-- nome e icone do documento -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
   <link rel="shortcut icon" href="assets/brain.jpg" type="image/x-icon" />
   <title>Devices | Hardemic Solutions</title>
 </head>
@@ -391,10 +392,10 @@
           console.log(resposta);
 
           resposta.json().then((json) => {
-            // console.log(json);
-            // console.log(JSON.stringify(json));
-            // yValue1.shift();
-            yValue1.push(json.map(obj => obj.cpu).at(-1));
+            console.log(json);
+            console.log(JSON.stringify(json));
+            yValue1.shift();
+            yValue1.push(json.map(obj => obj.cpu).slice(-1));
 
             window.chart1.update();
             setTimeout(() => atualizargraficoCpu(), 2000)
@@ -429,21 +430,20 @@
 
           resposta.json().then((json) => {
             console.log(json);
-            yValue1.push(json.reverse().map(obj => obj.cpu));
-            // yValue1.push([85, 96, 98, 95]);
-            // console.log(JSON.stringify(json));
-            var ctx = document.getElementsByClassName("line-chart1")[0].getContext("2d");;
+            yValue1.push(json.map(obj => obj.cpu));
+            console.log(JSON.stringify(json));
+            var ctx = document.getElementsByClassName("line-chart1");
             window.chart1 = new Chart(ctx, {
               type: "line",
               data: {
-                labels: [0, 1, 2, 3, 4, 5],
+                labels: [],
                 datasets: [
                   {
                     label: "Desempenho CPU",
-                    data: yValue1,
+                    data: [96, 98, 55, 92],
                     borderWidth: 6,
                     borderColor: "#7F13A1",
-                    backgroundColor: "#ccc",
+                    backgroundColor: "#7F13A1",
                     responsive: true,
                     maintainAspectRatio: false,
                   },
