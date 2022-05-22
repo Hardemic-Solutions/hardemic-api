@@ -83,8 +83,8 @@
           <canvas class="line-chart1"></canvas>
         </div>
         <div style="display: none" id="dashBottom" class="dash_bottom">
-          <canvas id="line-chart2"></canvas>
-          <canvas id="line-chart3"></canvas>
+          <canvas class="line-chart2"></canvas>
+          <canvas class="line-chart3"></canvas>
         </div>
         <!-- tela add device -->
         <div id="dashAdd" style="display: none" class="add_box">
@@ -295,7 +295,10 @@
   var yValue1 = [];
   var yValue2 = [];
   var yValue3 = [];
-
+  let labels = [];
+  let labels2 = [];
+  let counterIndex = 0;
+  let counterIndex2 = 0;
   const socket = io("http://localhost:3333");
   socket.on("exibirDadosConectados", (dados) => {
     document.getElementById("connection").innerHTML = dados;
@@ -374,31 +377,47 @@
   window.onload = function () {
     renderizarDevices();
     rendezarizargraficoCpu();
+    rendezarizargraficoRam();
   };
 
   // type, data e options
 
   ////// grafico CPU
 
+
+
+  const ctx = document.getElementsByClassName("line-chart1");
+
+
   function atualizargraficoCpu() {
-    fetch("/usuarios/dadosgraph1", {
+    fetch("/dashboardRoutes/dadosgraph1", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       }
     })
       .then(function (resposta) {
-        console.log("ESTOU NO THEN DO entrar()!");
+
 
         if (resposta.ok) {
-          console.log(resposta);
+          // console.log(resposta);
 
           resposta.json().then((json) => {
-            console.log(json);
-            console.log(JSON.stringify(json));
-            yValue1.shift();
-            yValue1.push(json.map(obj => obj.cpu).slice(-1));
-            
+            // console.log(json);
+            // console.log(JSON.stringify(json));
+            // yValue1.shift();
+            if (labels.length >= 6) {
+              labels.shift();
+            }
+
+            if (yValue1.length >= 6) {
+              yValue1.shift()
+            }
+
+            labels.push(counterIndex++)
+            yValue1.push(json.map(obj => obj.cpu).at(-1))
+            // yValue1.push(Math.random() * 10);
+
             window.chart1.update();
             setTimeout(() => atualizargraficoCpu(), 2000)
           });
@@ -418,41 +437,68 @@
   }
 
   function rendezarizargraficoCpu() {
-    fetch("/usuarios/dadosgraph1", {
+    fetch("/dashboardRoutes/dadosgraph1", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       }
     })
       .then(function (resposta) {
-        console.log("ESTOU NO THEN DO entrar()!");
+
 
         if (resposta.ok) {
           console.log(resposta);
 
           resposta.json().then((json) => {
-            console.log(json);
-            yValue1.push(json.map(obj => obj.cpu));
-            console.log(JSON.stringify(json));
-            var ctx = document.getElementsByClassName("line-chart1");
+            // console.log(json);
+            json.forEach(obj => {
+              labels.push(counterIndex++);
+              yValue1.push(obj.cpu);
+            });
+            // yValue1.push([85, 96, 98, 95]);
+            // console.log(JSON.stringify(json));
+            var ctx = document.getElementsByClassName("line-chart1")[0].getContext("2d");;
             window.chart1 = new Chart(ctx, {
               type: "line",
               data: {
-                labels: [],
+                labels: labels,
                 datasets: [
                   {
                     label: "Desempenho CPU",
-                    data: [96,98,55,92],
+                    data: yValue1,
                     borderWidth: 6,
                     borderColor: "#7F13A1",
-                    backgroundColor: "#7F13A1",
-                    responsive: true,
+                    backgroundColor: "#ccc",
                     maintainAspectRatio: false,
                   },
                 ],
               },
+              options: {
+                responsive: true,
+                animation: { duration: 1000 },
+                hoverMode: 'index',
+                stacked: false,
+                title: {
+                  display: false,
+                  text: ''
+                },
+                scales: {
+                  yAxes: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    ticks: {
+                      beginAtZero: true,
+                      max: 100,
+                      min: 0
+                    }
+                  }
+
+                }
+
+              }
             });
-             setTimeout(() => atualizargraficoCpu(), 2000);
+            setTimeout(() => atualizargraficoCpu(), 2000);
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
@@ -466,120 +512,228 @@
         console.log(erro);
       });
 
+
   }
 
-  // function graficoRam() {
-  //   fetch("/usuarios/dadosgraph2", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({}),
-  //   })
-  //     .then(function (resposta) {
-  //       console.log("ESTOU NO THEN DO entrar()!");
+  rendezarizargraficoCpu()
 
-  //       if (resposta.ok) {
-  //         console.log(resposta);
+  function atualizargraficoRam() {
+    fetch("/dashboardRoutes/dadosgraph2", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then(function (resposta) {
 
-  //         resposta.json().then((json) => {
-  //           console.log(json);
-  //           console.log(JSON.stringify(json));
-  //           yValue2.push(json.RAM);
-  //         });
-  //       } else {
-  //         console.log("Houve um erro ao tentar realizar a obtencao de dados!");
 
-  //         resposta.text().then((texto) => {
-  //           console.error(texto);
-  //         });
-  //       }
-  //     })
-  //     .catch(function (erro) {
-  //       console.log(erro);
-  //     });
+        if (resposta.ok) {
+          // console.log(resposta);
 
-  //   return false;
-  // }
+          resposta.json().then((json) => {
+            // console.log(json);
+            // console.log(JSON.stringify(json));
+            // yValue1.shift();
+            yValue2 = [];
+            yValue3.push(json[0].ramDisponivel, json[0].ram);
+            // yValue1.push(Math.random() * 10);
+
+            window.chart2.update();
+            setTimeout(() => atualizargraficoRam(), 2000)
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+
+          resposta.text().then((texto) => {
+            console.error(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+
+    return false;
+  }
 
   // ////// grafico ram
 
-  // function grafiRam() {
-  //   new Chart("line-chart2", {
-  //     type: "doughnut",
-  //     data: {
-  //       labels: ["Usada", "Livre"],
-  //       datasets: [
-  //         {
-  //           label: "RAM",
-  //           data: yValue2,
-  //           borderWidth: 20,
-  //           borderColor: "#7F13A1",
-  //           backgroundColor: "#7F13A1",
-  //           responsive: true,
-  //           maintainAspectRatio: false,
-  //         },
-  //       ],
-  //     },
-  //   });
-  // }
-  // // setTimeout(() => grafiRam(), 2000);
+  function rendezarizargraficoRam() {
+    fetch("/dashboardRoutes/dadosgraph2", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then(function (resposta) {
+
+
+        if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then((json) => {
+            console.log(json);
+
+
+            yValue3.push(json[0].ramDisponivel, json[0].ram);
+
+            // yValue1.push([85, 96, 98, 95]);
+            // console.log(JSON.stringify(json));
+            var ctx2 = document.getElementsByClassName("line-chart2")[0].getContext("2d");
+            window.chart2 = new Chart(ctx2, {
+              type: "pie",
+              data: {
+                labels: ["disponivel", "usado"],
+                datasets: [
+                  {
+                    label: "Desempenho disco",
+                    data: yValue3,
+                    backgroundColor: [
+                      '#f6f6f6', '#5bb4ee'
+                    ],
+
+                  },
+                ],
+              },
+              options: {
+                plugins: {
+                  legend: {
+                    labels: {
+                      // This more specific font property overrides the global property
+                      font: {
+                        size: 26,
+                        weight: 'bold',
+                        lineHeigth: 2.0
+                      }
+                    }
+                  }
+                }
+              }
+            });
+            setTimeout(() => atualizargraficoDisco(), 2000);
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+
+          resposta.text().then((texto) => {
+            console.error(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+  }
+  rendezarizargraficoRam()
 
   // ////// grafico disco
 
-  // function graficoDisco() {
-  //   fetch("/usuarios/dadosgraph3", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({}),
-  //   })
-  //     .then(function (resposta) {
-  //       console.log("ESTOU NO THEN DO entrar()!");
-
-  //       if (resposta.ok) {
-  //         console.log(resposta);
-
-  //         resposta.json().then((json) => {
-  //           console.log(json);
-  //           console.log(JSON.stringify(json));
-  //           yValue3.push(json.DISCO);
-  //         });
-  //       } else {
-  //         console.log("Houve um erro ao tentar realizar a obtencao de dados!");
-
-  //         resposta.text().then((texto) => {
-  //           console.error(texto);
-  //         });
-  //       }
-
-  //     }).catch(function (erro) {
-  //       console.log(erro);
-  //     })
-
-  //   return false;
-  // }
-
-  // function graficoDisco() {
-  //   window.chart3 = new Chart("line-chart3", {
-  //     type: 'doughnut',
-  //     labels: ["Usada", "Livre"],
-  //     datasets: [{
-  //       label: "Disco",
-  //       data: yValue3,
-  //       borderWidth: 20,
-  //       borderColor: '#7F13A1',
-  //       backgroundColor: '#7F13A1',
-  //       responsive: true,
-  //       maintainAspectRatio: false
-  //     }]
-  //   });
+  function atualizargraficoDisco() {
+    fetch("/dashboardRoutes/dadosgraph3", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then(function (resposta) {
 
 
+        if (resposta.ok) {
+          // console.log(resposta);
 
-  // }
+          resposta.json().then((json) => {
+            // console.log(json);
+            // console.log(JSON.stringify(json));
+            // yValue1.shift();
+            yValue3 = [];
+            yValue3.push(json[0].discoDisponivel, json[0].armazenamento);
+            // yValue1.push(Math.random() * 10);
 
+            window.chart3.update();
+            setTimeout(() => atualizargraficoDisco(), 2000)
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+
+          resposta.text().then((texto) => {
+            console.error(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+
+    return false;
+  }
+
+  function rendezarizargraficoDisco() {
+    fetch("/dashboardRoutes/dadosgraph3", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then(function (resposta) {
+
+
+        if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then((json) => {
+            console.log(json);
+
+
+            yValue3.push(json[0].discoDisponivel, json[0].armazenamento);
+
+            // yValue1.push([85, 96, 98, 95]);
+            // console.log(JSON.stringify(json));
+            var ctx3 = document.getElementsByClassName("line-chart3")[0].getContext("2d");
+            window.chart3 = new Chart(ctx3, {
+              type: "pie",
+              data: {
+                labels: ["disponivel", "usado"],
+                datasets: [
+                  {
+                    label: "Desempenho disco",
+                    data: yValue3,
+                    backgroundColor: [
+                      '#f6f6f6', '#5bb4ee'
+                    ],
+
+                  },
+                ],
+              },
+              options: {
+                plugins: {
+                  legend: {
+                    labels: {
+                      // This more specific font property overrides the global property
+                      font: {
+                        size: 26,
+                        weight: 'bold',
+                        lineHeigth: 2.0
+                      }
+                    }
+                  }
+                }
+              }
+            });
+            setTimeout(() => atualizargraficoDisco(), 2000);
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+
+          resposta.text().then((texto) => {
+            console.error(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+  }
+  rendezarizargraficoDisco();
   // setTimeout(() => {
   //   graficoDisco();
   //   window.chart3.update()

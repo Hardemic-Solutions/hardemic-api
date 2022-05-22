@@ -27,15 +27,6 @@ router.delete("/:idUsuario", function (req, res) {
     usuarioController.deletar(req, res)
 })
 
-router.get("/dadosgraph1", function (req, res) {
-    usuarioController.graficoCpu(req, res);
-});
-router.get("/dadosgraph2", function (req, res) {
-    usuarioController.graficoDisco(req, res);
-});
-router.get("/dadosgraph3", function (req, res) {
-    usuarioController.graficoRam(req, res);
-});
 
 
 module.exports = router;
