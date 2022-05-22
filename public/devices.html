@@ -192,44 +192,69 @@
   socket.on("exibirDadosConectados", (dados) => {
     document.getElementById("connection").innerHTML = dados;
   });
-  socket.on("problema", (dados) => {
-    alert(dados.hostname);
+  socket.on("problema", (problema) => {
+    console.log(problema)
+    const deviceJaExiste = devices.find(device => {
+      return device.hostname === problema.hostname
+    })
+
+    if (deviceJaExiste) {
+      deviceJaExiste.status = "Problema";
+    } else {
+      devices.push({
+        hostname,
+        status: "Problema",
+      });
+    }
+    renderizarDevices();
+
+    // alert(problema.hostname);
   });
-  socket.on("followjava", (hostname) => {
-    alert(hostname + " conectado");
-    devices.push({
-      hostname,
-      status: "conectado",
-    });
+  socket.on("followjava", ({ hostname }) => {
+    // alert(hostname + " conectado");
+    const deviceJaExiste = devices.find(device => {
+      return device.hostname === hostname
+    })
+
+    if (deviceJaExiste) {
+      deviceJaExiste.status = "conectado";
+    } else {
+      devices.push({
+        hostname,
+        status: "conectado",
+      });
+    }
+
     renderizarDevices();
   });
 
   socket.on("unfollowjava", (hostname) => {
-    alert(hostname + " desconectado");
+    // alert(hostname + " desconectado");
     const disconnect = devices.find(device => {
       return device.hostname === hostname
-
-
     })
     if (disconnect) {
       disconnect.status = "desconectado";
     }
     renderizarDevices();
   });
-  const devices = [
-    {
-      hostname: "123",
-      status: "conectado",
-    },
-    {
-      hostname: "311",
-      status: "conectado",
-    },
-    {
-      hostname: "021",
-      status: "conectado",
-    },
-  ];
+  // const devices = [
+  //   {
+  //     hostname: "123",
+  //     status: "conectado",
+  //   },
+  //   {
+  //     hostname: "311",
+  //     status: "conectado",
+  //   },
+  //   {
+  //     hostname: "021",
+  //     status: "conectado",
+  //   },
+  // ];
+
+  const devices = [];
+
 
   function renderizarDevices() {
     const box_devices = document.querySelector(".box_devices");
