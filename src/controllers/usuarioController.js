@@ -150,7 +150,6 @@ function deletar(req, res) {
 
 }
 
-
 module.exports = {
     entrar,
     cadastrar,

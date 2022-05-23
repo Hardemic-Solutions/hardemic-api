@@ -13,15 +13,11 @@ const io = new Server(httpServer, {
 let socketconectados = 0;
 const javasockets = [];
 io.on("connection", function (socket) {
-  // console.log(`socket conectado: ${socket.id}`);
-
-  // socket.emit("pegar_dados");
+  console.log(`socket conectado: ${socket.id}`);
 
   socket.on("pegar_dados", (hostname) => {
-    javasockets.push({
-      hostname,
-      id: socket.id
-    });
+    javasockets.push({ ...hostname, id: socket.id });
+
     socketconectados++;
     socket.broadcast.emit("followjava", hostname);
     socket.broadcast.emit("exibirDadosConectados", socketconectados);
@@ -30,9 +26,9 @@ io.on("connection", function (socket) {
   io.emit("exibirDadosConectados", socketconectados);
   console.log(`quantidade de sockets conectados:${socketconectados}`);
 
-  socket.on("problema", function (banco) {
-    console.log("problema", banco);
-    socket.broadcast.emit("problema", banco); //update do banco e chamada do banco(talvez uma model)
+  socket.on("problema", function (problema) {
+    console.log("problema", problema);
+    socket.broadcast.emit("problema", problema); //update do banco e chamada do banco(talvez uma model)
   });
 
   socket.on("disconnect", function (desmatch) {
