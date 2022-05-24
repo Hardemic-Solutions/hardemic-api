@@ -18,5 +18,10 @@ app.use(cors());
 
 app.use(require('./src/routes'));
 
+app.use((error, req, res, next) => {
+  console.log('Erro não tratado', error);
+  res.sendStatus(500);
+})
+
 module.exports = app;
 
