@@ -14,5 +14,6 @@ router.use("/empresa", require("./rotinas"));
 router.use("/empresa", require("./alertas"));
 router.use("/empresa", require('./configs'));
 router.use("/empresa", require('./chamados'));
+router.use("/dashboardRoutes", require("./dashboardRoutes"));
 
 module.exports = router;

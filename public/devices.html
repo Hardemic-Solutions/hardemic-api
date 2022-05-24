@@ -443,7 +443,6 @@
     })
       .then(function (resposta) {
 
-
         if (resposta.ok) {
           console.log(resposta);
 
@@ -538,9 +537,11 @@
 
             window.chart2.update();
             setTimeout(() => atualizargraficoRam(), 2000)
+
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+
 
           resposta.text().then((texto) => {
             console.error(texto);
@@ -635,14 +636,15 @@
     })
       .then(function (resposta) {
 
-
         if (resposta.ok) {
           // console.log(resposta);
+
 
           resposta.json().then((json) => {
             // console.log(json);
             // console.log(JSON.stringify(json));
             // yValue1.shift();
+
             yValue3 = [];
             yValue3.push(json[0].discoDisponivel, json[0].armazenamento);
             // yValue1.push(Math.random() * 10);
@@ -653,6 +655,7 @@
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
 
+
           resposta.text().then((texto) => {
             console.error(texto);
           });
@@ -661,6 +664,7 @@
       .catch(function (erro) {
         console.log(erro);
       });
+
 
     return false;
   }
@@ -680,6 +684,57 @@
 
           resposta.json().then((json) => {
             console.log(json);
+
+            yValue3.push(json[0].ramDisponivel, json[0].ram);
+
+            // yValue1.push([85, 96, 98, 95]);
+            // console.log(JSON.stringify(json));
+            var ctx2 = document.getElementsByClassName("line-chart2")[0].getContext("2d");
+            window.chart2 = new Chart(ctx2, {
+              type: "pie",
+              data: {
+                labels: ["disponivel", "usado"],
+                datasets: [
+                  {
+                    label: "Desempenho disco",
+                    data: yValue3,
+                    backgroundColor: [
+                      '#f6f6f6', '#5bb4ee'
+                    ],
+
+                  },
+                ],
+              },
+              options: {
+                plugins: {
+                  legend: {
+                    labels: {
+                      // This more specific font property overrides the global property
+                      font: {
+                        size: 26,
+                        weight: 'bold',
+                        lineHeigth: 2.0
+                      }
+                    }
+                  }
+                }
+              }
+            });
+            setTimeout(() => atualizargraficoDisco(), 2000);
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+
+          resposta.text().then((texto) => {
+            console.error(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+  }
+  rendezarizargraficoRam()
 
 
             yValue3.push(json[0].discoDisponivel, json[0].armazenamento);
@@ -721,6 +776,7 @@
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+
 
           resposta.text().then((texto) => {
             console.error(texto);
