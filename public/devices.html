@@ -103,15 +103,15 @@
             <div class="container_father">
               <div class="container_add">
                 <h2>Patrimônio</h2>
-                <input placeholder="Digite o patrimônio da máquina" type="text" />
+                <input placeholder="Digite o patrimônio da máquina" type="text" id="iptPatrimonio" />
               </div>
               <div class="container_add">
                 <h2>Hostname</h2>
-                <input placeholder="Digite o hostname da máquina" type="text" />
+                <input placeholder="Digite o hostname da máquina" type="text" id="iptHostname" />
               </div>
               <div class="container_add">
                 <h2>Sala</h2>
-                <select name="" id="">
+                <select name="" id="iptSala">
                   <option value="null">Escolha uma sala</option>
                   <option value="1A">1A</option>
                   <option value="1B">1B</option>
@@ -150,15 +150,15 @@
             <div class="container_father">
               <div class="container_add">
                 <h2>Patrimônio</h2>
-                <input placeholder="Digite o patrimônio da máquina" type="text" />
+                <input placeholder="Digite o patrimônio da máquina" type="text" id="iptPatrimonioNovo" />
               </div>
               <div class="container_add">
                 <h2>Hostname</h2>
-                <input placeholder="Digite o hostname da máquina" type="text" />
+                <input placeholder="Digite o hostname da máquina" type="text" id="iptHostnameNovo"/>
               </div>
               <div class="container_add">
                 <h2>Sala</h2>
-                <select name="" id="">
+                <select name="" id="iptSalaNova">
                   <option value="null">Escolha uma sala</option>
                   <option value="1A">1A</option>
                   <option value="1B">1B</option>
@@ -509,7 +509,7 @@
                 }
               }
             });
-            setTimeout(() => atualizargraficoDisco(), 2000);
+            setTimeout(() => atualizargraficoRam(), 2000);
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
@@ -585,12 +585,12 @@
           resposta.json().then((json) => {
             console.log(json);
 
-            yValue3.push(json[0].ramDisponivel, json[0].ram);
+            yValue3.push(json[0].discoDisponivel, json[0].armazenamento);
 
             // yValue1.push([85, 96, 98, 95]);
             // console.log(JSON.stringify(json));
-            var ctx2 = document.getElementsByClassName("line-chart2")[0].getContext("2d");
-            window.chart2 = new Chart(ctx2, {
+            var ctx3 = document.getElementsByClassName("line-chart3")[0].getContext("2d");
+            window.chart3 = new Chart(ctx3, {
               type: "pie",
               data: {
                 labels: ["disponivel", "usado"],
