@@ -1,214 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- CDN dos icones usados -->
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css"
-    />
-    <!-- arquivos para estilização do html -->
-    <link rel="stylesheet" href="./css/global.css" />
-    <link rel="stylesheet" href="./css/devices.css" />
-    <!-- arquivo para js da pagina -->
-    <script src="./js/devices.js"></script>
-    <!-- nome e icone do documento -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-    <link rel="shortcut icon" href="assets/brain.jpg" type="image/x-icon" />
-    <title>Devices | Hardemic Solutions</title>
-  </head>
 
-  <body>
-    <div class="box_all">
-      <div class="navegation_bar">
-        <div class="box_bar">
-          <a href="./devices.html">Devices</a>
-          <i class="fi fi-rr-screen"></i>
-        </div>
-        <div class="box_bar">
-          <a href="./dashboard.html">Dash</a>
-          <i class="fi fi-rr-stats"></i>
-        </div>
-        <div class="box_bar">
-          <a href="./tickets.html">Tickets</a>
-          <i class="fi fi-rr-ticket"></i>
-        </div>
-        <div class="box_bar">
-          <a href="">Alertas</a>
-          <i class="fi fi-rr-bell"></i>
-        </div>
-        <div class="box_bar">
-          <a href="./rotinas.html">Rotinas</a>
-          <i class="fi fi-rr-calendar"></i>
-        </div>
-        <div class="box_bar">
-          <a href="./config.html">Configurações</a>
-          <i class="fi fi-rr-settings"></i>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CDN dos icones usados -->
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" />
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css" />
+  <link rel="stylesheet"
+    href="https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css" />
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css" />
+  <!-- arquivos para estilização do html -->
+  <link rel="stylesheet" href="./css/global.css" />
+  <link rel="stylesheet" href="./css/devices.css" />
+  <!-- arquivo para js da pagina -->
+  <script src="./js/devices.js"></script>
+  <!-- nome e icone do documento -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+  <link rel="shortcut icon" href="assets/brain.jpg" type="image/x-icon" />
+  <title>Devices | Hardemic Solutions</title>
+</head>
+
+<body>
+  <div class="box_all">
+    <div class="navegation_bar">
+      <div class="box_bar">
+        <a href="./devices.html">Devices</a>
+        <i class="fi fi-rr-screen"></i>
       </div>
-
-      <div class="box_chart">
-        <div class="header_bar">
-          <div class="container_left">
-            <button class="btn_modal" onclick="modalEdit.open()">
-              Editar Device
-            </button>
-            <button class="btn_modal" onclick="modalDelete.open()">
-              Excluir Device
-            </button>
-            <button class="btn_modal" onclick="modalAddSala.open()">
-              Adicionar Sala
-            </button>
-            <button class="btn_modal" onclick="modalDeleteSala.open()">
-              Excluir Sala
-            </button>
-          </div>
-          <div class="container_right">
-            <i class="fi fi-sr-envelope"></i>
-            <i onclick="meuPerfil()" class="fi fi-sr-user"></i>
-          </div>
-        </div>
-        <div class="tittle_devices">
-          <h1>Conectados: <span id="connection">0</span></h1>
-        </div>
-        <div class="box_devices"></div>
+      <div class="box_bar">
+        <a href="./dashboard.html">Dash</a>
+        <i class="fi fi-rr-stats"></i>
       </div>
-
-      <div class="modal_dash">
-        <div id="modalDev" class="modal">
-          <!-- tela dash device -->
-          <div class="header_modal">
-            <i onclick="modalDash.close()" class="fi fi-br-cross"></i>
-          </div>
-          <div class="header_tittle">
-            <h2 id="tittle_modal"></h2>
-          </div>
-          <div style="display: none" id="dashTop" class="dash_top">
-            <canvas class="line-chart1"></canvas>
-          </div>
-          <div style="display: none" id="dashBottom" class="dash_bottom">
-            <canvas class="line-chart2"></canvas>
-            <canvas class="line-chart3"></canvas>
-          </div>
-          <!-- tela add device -->
-          <div id="dashAdd" style="display: none" class="add_box">
-            <div class="left_add">
-              <i class="fi fi-rs-computer"></i>
-            </div>
-            <div class="right_add">
-              <div class="container_father">
-                <div class="container_add">
-                  <h2>Patrimônio</h2>
-                  <input
-                    placeholder="Digite o patrimônio da máquina"
-                    type="text"
-                  />
-                </div>
-                <div class="container_add">
-                  <h2>Hostname</h2>
-                  <input
-                    placeholder="Digite o hostname da máquina"
-                    type="text"
-                  />
-                </div>
-                <div class="container_add">
-                  <h2>Sala</h2>
-                  <select name="" id="">
-                    <option value="null">Escolha uma sala</option>
-                    <option value="1A">1A</option>
-                    <option value="1B">1B</option>
-                    <option value="2A">2A</option>
-                    <option value="2B">2B</option>
-                    <option value="3A">3A</option>
-                    <option value="3B">3B</option>
-                    <option value="4A">4A</option>
-                    <option value="4B">4B</option>
-                  </select>
-                </div>
-              </div>
-              <div class="container_button">
-                <button onclick="modalDash.close()">Salvar</button>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="box_bar">
+        <a href="./tickets.html">Tickets</a>
+        <i class="fi fi-rr-ticket"></i>
       </div>
-
-      <!-- modal editar devices -->
-
-      <div class="modal_edit">
-        <div id="modalEditar" class="modal_editar">
-          <div class="header_modal">
-            <i onclick="modalEdit.close()" class="fi fi-br-cross"></i>
-          </div>
-          <div class="header_tittle">
-            <h2 id="tittle_modal">Editar Device</h2>
-          </div>
-          <div class="container_edit">
-            <div class="left_add">
-              <i class="fi fi-rs-computer"></i>
-            </div>
-            <div class="right_add">
-              <div class="container_father">
-                <div class="container_add">
-                  <h2>Patrimônio</h2>
-                  <input
-                    placeholder="Digite o patrimônio da máquina"
-                    type="text"
-                  />
-                </div>
-                <div class="container_add">
-                  <h2>Hostname</h2>
-                  <input
-                    placeholder="Digite o hostname da máquina"
-                    type="text"
-                  />
-                </div>
-                <div class="container_add">
-                  <h2>Sala</h2>
-                  <select name="" id="">
-                    <option value="null">Escolha uma sala</option>
-                    <option value="1A">1A</option>
-                    <option value="1B">1B</option>
-                    <option value="2A">2A</option>
-                    <option value="2B">2B</option>
-                    <option value="3A">3A</option>
-                    <option value="3B">3B</option>
-                    <option value="4A">4A</option>
-                    <option value="4B">4B</option>
-                  </select>
-                </div>
-              </div>
-              <div class="container_button">
-                <button onclick="modalEdit.close()">Salvar</button>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="box_bar">
+        <a href="">Alertas</a>
+        <i class="fi fi-rr-bell"></i>
       </div>
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+      <div class="box_bar">
+        <a href="./rotinas.html">Rotinas</a>
+        <i class="fi fi-rr-calendar"></i>
+      </div>
+      <div class="box_bar">
+        <a href="./config.html">Configurações</a>
+        <i class="fi fi-rr-settings"></i>
+      </div>
     </div>
-  </body>
-  <script
-    src="https://cdn.socket.io/4.5.0/socket.io.min.js"
-    integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
-    crossorigin="anonymous"
-  ></script>
+
+    <div class="box_chart">
+      <div class="header_bar">
+        <div class="container_left">
+          <button class="btn_modal" onclick="modalEdit.open()">
+            Editar Device
+          </button>
+          <button class="btn_modal" onclick="modalDelete.open()">
+            Excluir Device
+          </button>
+          <button class="btn_modal" onclick="modalAddSala.open()">
+            Adicionar Sala
+          </button>
+          <button class="btn_modal" onclick="modalDeleteSala.open()">
+            Excluir Sala
+          </button>
+        </div>
+        <div class="container_right">
+          <i class="fi fi-sr-envelope"></i>
+          <i onclick="meuPerfil()" class="fi fi-sr-user"></i>
+        </div>
+      </div>
+      <div class="tittle_devices">
+        <h1>Conectados: <span id="connection">0</span></h1>
+      </div>
+      <div class="box_devices"></div>
+    </div>
+
+    <div class="modal_dash">
+      <div id="modalDev" class="modal">
+        <!-- tela dash device -->
+        <div class="header_modal">
+          <i onclick="modalDash.close()" class="fi fi-br-cross"></i>
+        </div>
+        <div class="header_tittle">
+          <h2 id="tittle_modal"></h2>
+        </div>
+        <div style="display: none" id="dashTop" class="dash_top">
+          <canvas class="line-chart1"></canvas>
+        </div>
+        <div style="display: none" id="dashBottom" class="dash_bottom">
+          <canvas class="line-chart2"></canvas>
+          <canvas class="line-chart3"></canvas>
+        </div>
+        <!-- tela add device -->
+        <div id="dashAdd" style="display: none" class="add_box">
+          <div class="left_add">
+            <i class="fi fi-rs-computer"></i>
+          </div>
+          <div class="right_add">
+            <div class="container_father">
+              <div class="container_add">
+                <h2>Patrimônio</h2>
+                <input placeholder="Digite o patrimônio da máquina" type="text" />
+              </div>
+              <div class="container_add">
+                <h2>Hostname</h2>
+                <input placeholder="Digite o hostname da máquina" type="text" />
+              </div>
+              <div class="container_add">
+                <h2>Sala</h2>
+                <select name="" id="">
+                  <option value="null">Escolha uma sala</option>
+                  <option value="1A">1A</option>
+                  <option value="1B">1B</option>
+                  <option value="2A">2A</option>
+                  <option value="2B">2B</option>
+                  <option value="3A">3A</option>
+                  <option value="3B">3B</option>
+                  <option value="4A">4A</option>
+                  <option value="4B">4B</option>
+                </select>
+              </div>
+            </div>
+            <div class="container_button">
+              <button onclick="modalDash.close()">Salvar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- modal editar devices -->
+
+    <div class="modal_edit">
+      <div id="modalEditar" class="modal_editar">
+        <div class="header_modal">
+          <i onclick="modalEdit.close()" class="fi fi-br-cross"></i>
+        </div>
+        <div class="header_tittle">
+          <h2 id="tittle_modal">Editar Device</h2>
+        </div>
+        <div class="container_edit">
+          <div class="left_add">
+            <i class="fi fi-rs-computer"></i>
+          </div>
+          <div class="right_add">
+            <div class="container_father">
+              <div class="container_add">
+                <h2>Patrimônio</h2>
+                <input placeholder="Digite o patrimônio da máquina" type="text" />
+              </div>
+              <div class="container_add">
+                <h2>Hostname</h2>
+                <input placeholder="Digite o hostname da máquina" type="text" />
+              </div>
+              <div class="container_add">
+                <h2>Sala</h2>
+                <select name="" id="">
+                  <option value="null">Escolha uma sala</option>
+                  <option value="1A">1A</option>
+                  <option value="1B">1B</option>
+                  <option value="2A">2A</option>
+                  <option value="2B">2B</option>
+                  <option value="3A">3A</option>
+                  <option value="3B">3B</option>
+                  <option value="4A">4A</option>
+                  <option value="4B">4B</option>
+                </select>
+              </div>
+            </div>
+            <div class="container_button">
+              <button onclick="modalEdit.close()">Salvar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+  </div>
+</body>
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+  integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+
 </html>
 <script>
   var yValue1 = [];
@@ -259,7 +235,10 @@
       hostname: "021",
       status: "conectado",
     },
-  ];
+  ]
+
+  // const devices = [];
+
 
   function renderizarDevices() {
     const box_devices = document.querySelector(".box_devices");
