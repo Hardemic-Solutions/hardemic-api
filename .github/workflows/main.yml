@@ -50,5 +50,5 @@ jobs:
         with:
           app-name: 'hardemic'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_eb8c23ff20404b0681d52063a92ebca1 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
           package: .
