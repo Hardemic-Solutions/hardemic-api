@@ -1,6 +1,6 @@
 const server = require("./socket")
 
-const PORTA = process.env.NODE_ENV === "local" ? 3333 : 8080
+const PORTA =  3333 
 
 server.listen(PORTA, function () {
     console.log(`Servidor do site está rodando rodando: ${process.env.WEBSITE_SITE_NAME}:${PORTA} \n
