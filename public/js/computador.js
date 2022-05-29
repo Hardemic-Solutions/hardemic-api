@@ -2,10 +2,10 @@ function cadastrarComputador() {
 
     const patrimonioServer = iptPatrimonio.value;
     const hostnameServer = iptHostname.value;
-    const salaServer = iptSala.value;
+    // const salaServer = iptSala.value;
 
 
-    if (patrimonioServer == "" || hostnameServer == "" || salaServer == "") {
+    if (patrimonioServer == "" || hostnameServer == "") {
         alert("Insira seus dados!")
     }
 
@@ -16,8 +16,8 @@ function cadastrarComputador() {
         },
         body: JSON.stringify({
             patrimonioServer,
-            hostnameServer,
-            salaServer
+            hostnameServer
+            // salaServer
         })
     }).then(function (resposta) {
         let button = document.querySelector(".cadastrar");
@@ -39,7 +39,7 @@ function cadastrarComputador() {
 function alterarMaquina() {
     const patrimonioNovoServer = iptPatrimonioNovo.value;
     const hostnameNovoServer = iptHostnameNovo.value;
-    const salaNovaServer = iptSalaNova.value;
+    // const salaNovaServer = iptSalaNova.value;
 
 
     fetch("/instituicao/alterarMaquina/" + sessionStorage.ID_COMPUTADOR, {
@@ -49,8 +49,8 @@ function alterarMaquina() {
         },
         body: JSON.stringify({
             patrimonioNovoServer,
-            hostnameNovoServer,
-            salaNovaServer
+            hostnameNovoServer
+            // salaNovaServer
         })
     }).then(function (resposta) {
         console.log("ESTOU NO THEN DO atualizar()!")

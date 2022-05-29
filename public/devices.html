@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="./css/devices.css" />
   <!-- arquivo para js da pagina -->
   <script src="./js/devices.js"></script>
+  <script src="./js/global.js"></script>
+  <script src="./js/computador.js"></script>
   <!-- nome e icone do documento -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
   <link rel="shortcut icon" href="assets/brain.jpg" type="image/x-icon" />
@@ -25,28 +27,24 @@
 <body>
   <div class="box_all">
     <div class="navegation_bar">
-      <div class="box_bar">
-        <a href="./devices.html">Devices</a>
+      <div onclick="goToDevices()" class="box_bar">
+        <a>Devices</a>
         <i class="fi fi-rr-screen"></i>
       </div>
-      <div class="box_bar">
-        <a href="./dashboard.html">Dash</a>
+      <div onclick="goToDash()" class="box_bar">
+        <a>Dash</a>
         <i class="fi fi-rr-stats"></i>
       </div>
-      <div class="box_bar">
-        <a href="./tickets.html">Tickets</a>
+      <div onclick="goToTickets()" class="box_bar">
+        <a>Tickets</a>
         <i class="fi fi-rr-ticket"></i>
       </div>
-      <div class="box_bar">
-        <a href="">Alertas</a>
-        <i class="fi fi-rr-bell"></i>
-      </div>
-      <div class="box_bar">
-        <a href="./rotinas.html">Rotinas</a>
+      <div onclick="goToRotinas()" class="box_bar">
+        <a>Rotinas</a>
         <i class="fi fi-rr-calendar"></i>
       </div>
-      <div class="box_bar">
-        <a href="./config.html">Configurações</a>
+      <div onclick="goToConfig()" class="box_bar">
+        <a>Configurações</a>
         <i class="fi fi-rr-settings"></i>
       </div>
     </div>
@@ -54,7 +52,7 @@
     <div class="box_chart">
       <div class="header_bar">
         <div class="container_left">
-          <button class="btn_modal" onclick="modalEdit.open()">
+          <!-- <button class="btn_modal" onclick="modalEdit.open()">
             Editar Device
           </button>
           <button class="btn_modal" onclick="modalDelete.open()">
@@ -65,11 +63,11 @@
           </button>
           <button class="btn_modal" onclick="modalDeleteSala.open()">
             Excluir Sala
-          </button>
+          </button> -->
         </div>
         <div class="container_right">
-          <i class="fi fi-sr-envelope"></i>
           <i onclick="meuPerfil()" class="fi fi-sr-user"></i>
+          <i class="fi fi-rr-sign-out"></i>
         </div>
       </div>
       <div class="tittle_devices">
@@ -88,10 +86,36 @@
           <h2 id="tittle_modal"></h2>
         </div>
         <div style="display: none" id="dashTop" class="dash_top">
+          <div class="subtitle">
+            <h1>CPU</h1>
+            <span>% de utilização</span>
+          </div>
           <canvas class="line-chart1"></canvas>
         </div>
         <div style="display: none" id="dashBottom" class="dash_bottom">
+          <div class="subtitle">
+            <span>RAM:</span>
+            <span>
+              Usado
+              <div class="used"></div>
+            </span>
+            <span>
+              Disponível
+              <div class="empty"></div>
+            </span>
+          </div>
           <canvas class="line-chart2"></canvas>
+          <div class="subtitle">
+            <span>DISCO:</span>
+            <span>
+              Usado
+              <div class="used"></div>
+            </span>
+            <span>
+              Disponível
+              <div class="empty"></div>
+            </span>
+          </div>
           <canvas class="line-chart3"></canvas>
         </div>
         <!-- tela add device -->
@@ -154,7 +178,7 @@
               </div>
               <div class="container_add">
                 <h2>Hostname</h2>
-                <input placeholder="Digite o hostname da máquina" type="text" id="iptHostnameNovo"/>
+                <input placeholder="Digite o hostname da máquina" type="text" id="iptHostnameNovo" />
               </div>
               <div class="container_add">
                 <h2>Sala</h2>
@@ -251,6 +275,7 @@
                     </div>
                     <div class="dvc_right">
                         <h3>Device: ${item.hostname}</h3>
+                        <h3>Sala: ${item.fksala}</h3>
                         <div class="box_status">
                             <h3>${item.status}</h3>
                             <div class="dvc_status"></div>
@@ -361,10 +386,11 @@
                 labels: labels,
                 datasets: [
                   {
-                    label: "Desempenho CPU",
+                    label: 'Desempenho CPU',
                     data: yValue1,
-                    borderWidth: 6,
-                    borderColor: "#7F13A1",
+                    borderWidth: 8,
+                    tension: 0.1,
+                    borderColor: "#03a062",
                     backgroundColor: "#ccc",
                     maintainAspectRatio: false,
                   },
@@ -432,7 +458,7 @@
             // console.log(JSON.stringify(json));
             // yValue1.shift();
             yValue2 = [];
-            yValue3.push(json[0].ramDisponivel, json[0].ram);
+            yValue2.push(json[0].ramDisponivel, json[0].ram);
             // yValue1.push(Math.random() * 10);
 
             window.chart2.update();
@@ -474,23 +500,23 @@
             console.log(json);
 
 
-            yValue3.push(json[0].ramDisponivel, json[0].ram);
+            yValue2.push(json[0].ramDisponivel, json[0].ram);
 
             // yValue1.push([85, 96, 98, 95]);
             // console.log(JSON.stringify(json));
             var ctx2 = document.getElementsByClassName("line-chart2")[0].getContext("2d");
             window.chart2 = new Chart(ctx2, {
-              type: "pie",
+              type: "doughnut",
               data: {
-                labels: ["disponivel", "usado"],
+                // labels: ["disponivel", "usado"],
                 datasets: [
                   {
-                    label: "Desempenho disco",
-                    data: yValue3,
+                    label: "Ram",
+                    data: yValue2,
+                    borderColor: '#000',
                     backgroundColor: [
-                      '#f6f6f6', '#5bb4ee'
+                      '#f2f2f2', '#03a062'
                     ],
-
                   },
                 ],
               },
@@ -591,15 +617,16 @@
             // console.log(JSON.stringify(json));
             var ctx3 = document.getElementsByClassName("line-chart3")[0].getContext("2d");
             window.chart3 = new Chart(ctx3, {
-              type: "pie",
+              type: "doughnut",
               data: {
-                labels: ["disponivel", "usado"],
+                // labels: ["disponivel", "usado"],
                 datasets: [
                   {
-                    label: "Desempenho disco",
+                    label: "Disco",
                     data: yValue3,
+                    borderColor: '#000',
                     backgroundColor: [
-                      '#f6f6f6', '#5bb4ee'
+                      '#f2f2f2', '#03a062'
                     ],
 
                   },
