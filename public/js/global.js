@@ -21,3 +21,11 @@ function goToConfig() {
 function meuPerfil() {
     window.location = 'perfil.html';
 }
+
+function editDevice() {
+    window.alert('chamar modal de editar')
+}
+
+function deleteDevice() {
+    window.alert('chamar rota de deletar')
+}
