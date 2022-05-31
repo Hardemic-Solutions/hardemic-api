@@ -18,6 +18,10 @@ function goToConfig() {
     window.location = 'config.html'
 }
 
+function exit() {
+    window.location = 'login.html'
+}
+
 function meuPerfil() {
     window.location = 'perfil.html';
 }
