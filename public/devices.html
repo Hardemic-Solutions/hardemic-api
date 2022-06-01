@@ -210,6 +210,8 @@
 
 </html>
 <script>
+
+  let devices = [];
   var yValue1 = [];
   var yValue2 = [];
   var yValue3 = [];
@@ -217,13 +219,17 @@
   let labels2 = [];
   let counterIndex = 0;
   let counterIndex2 = 0;
+
   const socket = io("http://localhost:3333");
+
   socket.on("exibirDadosConectados", (dados) => {
     document.getElementById("connection").innerHTML = dados;
   });
+
   socket.on("problema", (dados) => {
     alert(dados.hostname);
   });
+
   socket.on("followjava", (hostname) => {
     alert(hostname + " conectado");
     devices.push({
@@ -237,35 +243,53 @@
     alert(hostname + " desconectado");
     const disconnect = devices.find(device => {
       return device.hostname === hostname
-
-
     })
     if (disconnect) {
       disconnect.status = "desconectado";
     }
     renderizarDevices();
   });
-  const devices = [
-    {
-      hostname: "123",
-      status: "conectado",
-    },
-    {
-      hostname: "311",
-      status: "conectado",
-    },
-    {
-      hostname: "021",
-      status: "conectado",
-    },
-  ]
 
-  // const devices = [];
+  window.onload = function () {
+    pegarQuantidadeDevices();
+  };
+
+  function pegarQuantidadeDevices() {
+    fetch("/dashboardRoutes/devices/" + sessionStorage.ID_EMPRESA, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+
+      .then(function (resposta) {
+        if (resposta.ok) {
+          resposta.json().then((json) => {
+            console.log(json);
+            let devices = json
+            console.log('esse foi o resultado: ' + devices.length);
+            renderizarDevices(devices);
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+          resposta.text().then((texto) => {
+            console.error(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+    return false;
+  }
 
 
-  function renderizarDevices() {
+  function renderizarDevices(devices) {
     const box_devices = document.querySelector(".box_devices");
     box_devices.innerHTML = "";
+
+    console.log(devices);
+
     devices.forEach((item, indice) => {
       box_devices.innerHTML += `
                  <div class="devices">
@@ -274,7 +298,7 @@
                     </div>
                     <div class="dvc_right">
                         <h3>Device: ${item.hostname}</h3>
-                        <h3>Sala: ${item.fksala}</h3>
+                        <h3>Sala: ${item.fk_sala}</h3>
                         <div class="box_status">
                             <h3>${item.status}</h3>
                             <div class="dvc_status"></div>
@@ -300,20 +324,11 @@
         `;
   }
 
-  window.onload = function () {
-    renderizarDevices();
-    rendezarizargraficoCpu();
-    rendezarizargraficoRam();
-  };
-
   // type, data e options
 
   ////// grafico CPU
 
-
-
   const ctx = document.getElementsByClassName("line-chart1");
-
 
   function atualizargraficoCpu() {
     fetch("/dashboardRoutes/dadosgraph1", {
@@ -389,12 +404,13 @@
                 labels: labels,
                 datasets: [
                   {
-                    label: 'Desempenho CPU',
+                    label: '',
                     data: yValue1,
                     borderWidth: 8,
                     tension: 0.1,
                     borderColor: "#03a062",
-                    backgroundColor: "#ccc",
+                    fill: true,
+                    backgroundColor: "#03a062",
                     maintainAspectRatio: false,
                   },
                 ],
@@ -441,7 +457,7 @@
 
   }
 
-  rendezarizargraficoCpu()
+  // rendezarizargraficoCpu()
 
   function atualizargraficoRam() {
     fetch("/dashboardRoutes/dadosgraph2", {
@@ -552,7 +568,7 @@
         console.log(erro);
       });
   }
-  rendezarizargraficoRam()
+  // rendezarizargraficoRam()
 
   // ////// grafico disco
 
@@ -665,14 +681,14 @@
       });
   }
 
-  rendezarizargraficoDisco();
+  // rendezarizargraficoDisco();
+
   // setTimeout(() => {
   //   graficoDisco();
   //   window.chart3.update()
   // }, 2000);
 
+  // pegar quantidades de computadores no banco
 
-  function meuPerfil() {
-    window.location = 'perfil.html';
-  }
+
 </script>

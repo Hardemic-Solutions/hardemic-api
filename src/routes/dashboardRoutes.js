@@ -14,5 +14,10 @@ router.get("/dadosgraph3", function (req, res) {
     dashboardController.graficoDisco(req, res);
 });
 
+// select pegar quantidade de computadores
+router.get("/devices/:idempresa", function (req, res) {
+    dashboardController.listDevices(req, res);
+});
+
 
 module.exports = router;
