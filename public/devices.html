@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="./css/devices.css" />
   <!-- arquivo para js da pagina -->
   <script src="./js/devices.js"></script>
+  <script src="js/global.js"></script>
   <!-- nome e icone do documento -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
   <link rel="shortcut icon" href="assets/brain.jpg" type="image/x-icon" />
@@ -25,31 +26,27 @@
 <body>
   <div class="box_all">
     <div class="navegation_bar">
-      <div class="box_bar">
-        <a href="./devices.html">Devices</a>
-        <i class="fi fi-rr-screen"></i>
+      <div  onclick="goToDevices()" class="box_bar">
+          <a>Devices</a>
+          <i class="fi fi-rr-screen"></i>
       </div>
-      <div class="box_bar">
-        <a href="./dashboard.html">Dash</a>
-        <i class="fi fi-rr-stats"></i>
+      <div  onclick="goToDash()" class="box_bar">
+          <a>Dash</a>
+          <i class="fi fi-rr-stats"></i>
       </div>
-      <div class="box_bar">
-        <a href="./tickets.html">Tickets</a>
-        <i class="fi fi-rr-ticket"></i>
+      <div  onclick="goToTickets()" class="box_bar">
+          <a>Tickets</a>
+          <i class="fi fi-rr-ticket"></i>
       </div>
-      <div class="box_bar">
-        <a href="">Alertas</a>
-        <i class="fi fi-rr-bell"></i>
+      <div  onclick="goToRotinas()" class="box_bar">
+          <a>Rotinas</a>
+          <i class="fi fi-rr-calendar"></i>
       </div>
-      <div class="box_bar">
-        <a href="./rotinas.html">Rotinas</a>
-        <i class="fi fi-rr-calendar"></i>
+      <div  onclick="goToConfig()" class="box_bar">
+          <a>Configurações</a>
+          <i class="fi fi-rr-settings"></i>
       </div>
-      <div class="box_bar">
-        <a href="./config.html">Configurações</a>
-        <i class="fi fi-rr-settings"></i>
-      </div>
-    </div>
+  </div>
 
     <div class="box_chart">
       <div class="header_bar">
@@ -57,19 +54,19 @@
           <button class="btn_modal" onclick="modalEdit.open()">
             Editar Device
           </button>
-          <button class="btn_modal" onclick="modalDelete.open()">
+          <button class="btn_modal" onclick="modalEdit.openDelete()">
             Excluir Device
           </button>
-          <button class="btn_modal" onclick="modalAddSala.open()">
+          <button class="btn_modal" onclick="modalEdit.openAddSala()">
             Adicionar Sala
           </button>
-          <button class="btn_modal" onclick="modalDeleteSala.open()">
-            Excluir Sala
+          <button class="btn_modal" onclick="modalEdit.openDeleteSala()">
+            Excluir Salas
           </button>
         </div>
         <div class="container_right">
-          <i class="fi fi-sr-envelope"></i>
           <i onclick="meuPerfil()" class="fi fi-sr-user"></i>
+          <i onclick="exit()" class="fi fi-rr-sign-out"></i>
         </div>
       </div>
       <div class="tittle_devices">
@@ -103,15 +100,15 @@
             <div class="container_father">
               <div class="container_add">
                 <h2>Patrimônio</h2>
-                <input placeholder="Digite o patrimônio da máquina" type="text" />
+                <input placeholder="Digite o patrimônio da máquina" type="text" id="iptPatrimonio" />
               </div>
               <div class="container_add">
                 <h2>Hostname</h2>
-                <input placeholder="Digite o hostname da máquina" type="text" />
+                <input placeholder="Digite o hostname da máquina" type="text" id="iptHostname" />
               </div>
               <div class="container_add">
                 <h2>Sala</h2>
-                <select name="" id="">
+                <select name="" id="iptSala">
                   <option value="null">Escolha uma sala</option>
                   <option value="1A">1A</option>
                   <option value="1B">1B</option>
@@ -140,23 +137,23 @@
           <i onclick="modalEdit.close()" class="fi fi-br-cross"></i>
         </div>
         <div class="header_tittle">
-          <h2 id="tittle_modal">Editar Device</h2>
+          <h2 id="tittle_modal_edit">Editar Device</h2>
         </div>
         <div class="container_edit">
-          <div class="left_add">
+        <div id="icone_modal" class="left_add">
             <i class="fi fi-rs-computer"></i>
           </div>
           <div class="right_add">
             <div class="container_father">
-              <div class="container_add">
+              <div id="container1" class="container_add">
                 <h2>Patrimônio</h2>
                 <input placeholder="Digite o patrimônio da máquina" type="text" />
               </div>
-              <div class="container_add">
+              <div id="container2" class="container_add">
                 <h2>Hostname</h2>
                 <input placeholder="Digite o hostname da máquina" type="text" />
               </div>
-              <div class="container_add">
+              <div id="container3" class="container_add">
                 <h2>Sala</h2>
                 <select name="" id="">
                   <option value="null">Escolha uma sala</option>
@@ -172,7 +169,10 @@
               </div>
             </div>
             <div class="container_button">
-              <button onclick="modalEdit.close()">Salvar</button>
+              <button id="btn_edit" style="display: none;" onclick="modalEdit.close()">Salvar</button>
+              <button id="btn_delete" style="display: none;" onclick="modalEdit.close()">Excluir</button>
+              <button id="btn_addSala" style="display: none;" onclick="modalEdit.close()">Adicionar</button>
+              <button id="btn_deleteSala" style="display: none;" onclick="modalEdit.close()">Excluir</button>
             </div>
           </div>
         </div>
@@ -509,7 +509,7 @@
                 }
               }
             });
-            setTimeout(() => atualizargraficoDisco(), 2000);
+            setTimeout(() => atualizargraficoRam(), 2000);
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
@@ -585,12 +585,12 @@
           resposta.json().then((json) => {
             console.log(json);
 
-            yValue3.push(json[0].ramDisponivel, json[0].ram);
+            yValue3.push(json[0].discoDisponivel, json[0].armazenamento);
 
             // yValue1.push([85, 96, 98, 95]);
             // console.log(JSON.stringify(json));
-            var ctx2 = document.getElementsByClassName("line-chart2")[0].getContext("2d");
-            window.chart2 = new Chart(ctx2, {
+            var ctx3 = document.getElementsByClassName("line-chart3")[0].getContext("2d");
+            window.chart3 = new Chart(ctx3, {
               type: "pie",
               data: {
                 labels: ["disponivel", "usado"],

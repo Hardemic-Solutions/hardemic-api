@@ -86,7 +86,7 @@ const modalEdit = {
         container2.innerHTML = `<h2>Andar</h2>
         <select name="" id="">
                                 <option value="null">Escolha um andar</option>
-                                <option value="1">1A</option>
+                                <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>

@@ -129,6 +129,11 @@ header a{
     margin-bottom: 5%;
 }
 
+.iptLogin input {
+    height: 30px;
+    border-radius: 10px;
+}
+
 .login .entrar{
     margin-top: 5%;
     background-color: #3B83BD;

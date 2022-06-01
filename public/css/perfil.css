@@ -81,7 +81,8 @@
 
 .ipt_alterar_senha input {
     width: 100%;
-    height: 20px;
+    height: 35px;
+    border-radius: 10px;
 }
 
 .btn_salvar {
