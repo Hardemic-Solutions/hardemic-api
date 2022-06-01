@@ -82,7 +82,7 @@
             </ul>
           </div>
         </div>
-
+        
         <!-- Adicionar rotina -->
 
         <div class="modal_rotina" class="add_box">
@@ -133,26 +133,45 @@
     window.location = 'perfil.html';
   }
 
+  function excluirRotina(idRotina) {
+    alert('Excluir a rotina:' + idRotina)
+  }
 
   function renderizarRotinas() {
-    var rotina1 = ["Aplicativos instalados", "Essa rotina faz uma verificação de quais são os apps instalados no pc", "Apps instalados.sh"];
+    fetch("/empresa/" + sessionStorage.ID_EMPRESA + "/rotinas", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }).then(function (resposta) {
+      if (resposta.ok) {
+        resposta.json().then((json) => {
+          let rotinas = json
+          rotinas.forEach((item) => {
+            linhaRotina.innerHTML += `
+                  <li class="hrow">
+                    <span class="percent20">${item.nome_rotina}</span>
+                    <span class="percent40">${item.descricao}</span>
+                    <span class="percent20">
+                        <a href="${item.caminho_rotina}" download="${item.nome_arquivo}"><button>Download</button></a>
+                    </span>
+                    <span class="percent20">
+                      <button onclick="excluirRotina(${item.id})">Excluir</button>
+                    </span>
+                  </li>`;
+          });
+        });
+        
+      }else {
+        console.log("Houve um erro ao tentar buscar os dados");
+        resposta.text().then((texto) => {
+          console.error(texto);
+        });
+      }
+  }).catch(function (erro) {
+        console.log(erro);
+      });
 
-    for (let index = 0; index < 4; index++) {
-      linhaRotina.innerHTML += `
-                 <li class="hrow">
-                  <span class="percent20">${rotina1[0]}</span>
-                  <span class="percent40">${rotina1[1]}</span>
-                  <span class="percent20">
-                    <button>
-                      ${rotina1[2]}
-                    </button>
-                  </span>
-                  <span class="percent20">
-                    <button>Envio email</button>
-                    <button>Download</button>
-                  </span>
-                </li>
-              `;
-    }
   }
+
 </script>
