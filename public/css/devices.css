@@ -328,8 +328,8 @@
 }
 
 .container_add select {
-  height: 45%;
-  width: 55%;
+  height: 30%;
+  width: 57%;
   color: black;
   border: none;
   border-radius: 15px;
@@ -434,7 +434,7 @@
 }
 
 .modal_editar {
-  background: #000000;
+  background: #121212;
   position: relative;
   height: 60%;
   width: 50%;
