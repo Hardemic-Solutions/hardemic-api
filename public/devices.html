@@ -160,7 +160,7 @@
     <div class="modal_edit">
       <div id="modalEditar" class="modal_editar">
         <div class="header_modal">
-          <i onclick="modalEdit.close()" class="fi fi-br-cross"></i>
+          <i onclick="modalEdit.close()" class="fi fi-sr-cross"></i>
         </div>
         <div class="header_tittle">
           <h2 id="tittle_modal">Editar Device</h2>
@@ -267,6 +267,7 @@
           resposta.json().then((json) => {
             console.log(json);
             let devices = json
+            connection.innerHTML = devices.length
             console.log('esse foi o resultado: ' + devices.length);
             renderizarDevices(devices);
           });
@@ -297,15 +298,11 @@
                         <i onclick="modalDash.open()" class="fi fi-rr-computer"></i>
                     </div>
                     <div class="dvc_right">
-                        <h3>Device: ${item.hostname}</h3>
+                        <h3>Hostname: ${item.hostname}</h3>
                         <h3>Sala: ${item.fk_sala}</h3>
-                        <div class="box_status">
-                            <h3>${item.status}</h3>
-                            <div class="dvc_status"></div>
-                        </div>
                     </div>
                     <div class="options">
-                        <i onclick="editDevice()" class="fi fi-sr-pencil"></i>
+                        <i onclick="modalEdit.open()" class="fi fi-sr-pencil"></i>
                         <i onclick="deleteDevice()" class="fi fi-sr-trash"></i>
                     </div>
                 </div>
