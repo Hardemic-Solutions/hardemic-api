@@ -62,7 +62,7 @@
           Rotinas
         </h1>
       </div>
-      <div class="box_dashboard" style="padding-top: 20px;">
+      <div class="box_dashboard" style="padding-top: 20px; overflow-y: scroll;">
         <div class="row">
           <span></span>
           <button class="add_button" onclick="modalRotina.open()">Nova Rotina</button>
@@ -89,7 +89,7 @@
           <div id="modalDev" class="modal">
             <!-- telamodal_rotina dash device -->
             <div class="header_modal">
-              <i onclick="modalRotina.close()" class="fi fi-br-cross"></i>
+              <i onclick="modalRotina.close()" class="fi fi-sr-cross"></i>
             </div>
             <div class="header_tittle">
               <h2 id="tittle_modal">Nova Rotina</h2>
@@ -97,21 +97,52 @@
             <div class="container">
               <div class="groupinput">
                 <label for="">Nome</label>
-                <input type="text">
+                <input id="nomeRotina" type="text">
               </div>
               <div class="groupinput">
                 <label for="">Descrição</label>
-                <textarea type="text" rows="10"></textarea>
+                <textarea id="descRotina" type="text" rows="10"></textarea>
               </div>
               <div class="groupinput">
                 <label for="">Escolha um arquivo</label>
                 <span>
-                  <label for="file" class="upload">Upload</label>
-                  <input id="file" type="file"></input>
+                  <input id="arquivo" type="file"></input>
                 </span>
               </div>
               <div>
-                <button class="add_button" style="width: 100%;">Salvar</button>
+                <button onclick="adicionarRotina()" class="add_button" style="width: 100%;">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Editar rotina -->
+
+        <div class="modal_editarRotina" class="add_box">
+          <div id="modalEdit" class="modal">
+            <!-- telamodal_rotina dash device -->
+            <div class="header_modal">
+              <i onclick="modalEditarRotina.close()" class="fi fi-sr-cross"></i>
+            </div>
+            <div class="header_tittle">
+              <h2 id="tittle_modalEdit">Editar Rotina</h2>
+            </div>
+            <div class="container">
+              <div class="groupinput">
+                <label for="">Nome</label>
+                <input id="editNomeRotina" type="text">
+              </div>
+              <div class="groupinput">
+                <label for="">Descrição</label>
+                <textarea id="editDescRotina" type="text" rows="10"></textarea>
+              </div>
+              <div class="groupinput">
+                <label for="">Escolha um arquivo</label>
+                <span>
+                  <input id="editArquivo" type="file"></input>
+                </span>
+              </div>
+              <div id="btn_editar">
               </div>
             </div>
           </div>
@@ -133,8 +164,55 @@
     window.location = 'perfil.html';
   }
 
+  function editarRotina(idRotina) {
+    const formData = new FormData();
+    
+    formData.append('rotina', editArquivo.files[0]);
+    formData.append('descricao', editDescRotina.value);
+    formData.append('nome', editNomeRotina.value);
+
+
+    fetch("/empresa/" + sessionStorage.ID_EMPRESA + "/rotinas/" + idRotina, {
+      method: "PUT",
+      body: formData,
+    }).then(function () {
+      alert('Rotina alterada');
+      modalRotina.close();
+      location.reload();
+  }).catch(function (erro) {
+        console.log(erro);
+      });
+  }
+
+  function adicionarRotina() {
+    const formData = new FormData();
+    
+    formData.append('rotina', arquivo.files[0]);
+    formData.append('descricao', descRotina.value);
+    formData.append('nome', nomeRotina.value);
+
+
+    fetch("/empresa/" + sessionStorage.ID_EMPRESA + "/rotinas", {
+      method: "POST",
+      body: formData,
+    }).then(function () {
+      alert('Rotina adicionada');
+      modalRotina.close();
+      location.reload();
+  }).catch(function (erro) {
+        console.log(erro);
+      });
+  }
+
   function excluirRotina(idRotina) {
-    alert('Excluir a rotina:' + idRotina)
+    fetch("/empresa/" + sessionStorage.ID_EMPRESA + "/rotinas/" + idRotina, {
+      method: "DELETE"
+    }).then(function () {
+      alert('Rotina excluida com sucesso');
+      location.reload();
+  }).catch(function (erro) {
+        console.log(erro);
+      });
   }
 
   function renderizarRotinas() {
@@ -147,7 +225,7 @@
       if (resposta.ok) {
         resposta.json().then((json) => {
           let rotinas = json
-          rotinas.forEach((item) => {
+          rotinas.forEach((item, indice) => {
             linhaRotina.innerHTML += `
                   <li class="hrow">
                     <span class="percent20">${item.nome_rotina}</span>
@@ -157,6 +235,7 @@
                     </span>
                     <span class="percent20">
                       <button onclick="excluirRotina(${item.id})">Excluir</button>
+                      <button onclick="modalEditarRotina.open(${item.id})">Editar</button>
                     </span>
                   </li>`;
           });
