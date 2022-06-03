@@ -49,6 +49,9 @@ module.exports = {
       "application/x-sh",
       "application/octet-stream",
       "application/x-msdownload",
+      "text/x-sh",
+      "text/octet-stream",
+      "text/x-msdownload",
     ];
 
     if (allowedMimes.includes(file.mimetype)) {
