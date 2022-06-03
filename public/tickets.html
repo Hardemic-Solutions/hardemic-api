@@ -67,10 +67,13 @@
           <!-- tittle columns -->
           <div class="tb_header">
             <div class="box_header">
-              <h2>Device</h2>
+              <h2>ID chamado</h2>
             </div>
             <div class="box_header">
-              <h2>Status</h2>
+              <h2>Hostname</h2>
+            </div>
+            <div class="box_header">
+              <h2>Descrição</h2>
             </div>
             <div class="box_header">
               <h2>Situação</h2>
@@ -123,38 +126,80 @@
 </body>
 <script>
 
-function renderizarDevices() {
+  function renderizarChamados(chamados) {
     const rowDevices = document.querySelector(".tb_tickets");
-    for (let i = 0; i < 5; i++) {
-      rowDevices.innerHTML += `
-      <div class="rows_devices">
+
+      chamados.forEach((item, indice) => {
+        rowDevices.innerHTML += `
+          <div class="rows_devices">
             <div class="box_info_devices">
               <h3>
-                Dev 12
+                ${item.id_chamado}
               </h3>
             </div>
             <div class="box_info_devices">
               <h3>
-                On
+                ${item.hostname}
               </h3>
             </div>
             <div class="box_info_devices">
               <h3>
-                Pendente
+                ${item.nome_alerta}
               </h3>
             </div>
             <div class="box_info_devices">
-              <h3>Detalhes...</h3>
+              <h3>
+                ${item.status}
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
+                ${item.descricao}  
+              </h3>
               <i onclick="showDesc()" class="fi fi-rr-info"></i>
             </div>
           </div>
             `;
-    }
-};
+      });
 
-window.onload = function () {
-  renderizarDevices();
-};
+  };
+
+  function buscarChamadosBanco() {
+
+    fetch("/empresa/" + sessionStorage.ID_EMPRESA + "/chamados", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+
+      .then(function (resposta) {
+        if (resposta.ok) {
+          resposta.json().then((json) => {
+            console.log(json);
+            let chamados = []
+            chamados = json
+            console.log('esse foi o resultado: ' + chamados.length);
+            renderizarChamados(chamados)
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+          resposta.text().then((texto) => {
+            console.error(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+
+    return false;
+  }
+
+  window.onload = function () {
+    buscarChamadosBanco();
+    // renderizarDevices();
+  };
 
 
 </script>
