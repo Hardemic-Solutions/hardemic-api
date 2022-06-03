@@ -54,10 +54,10 @@
           <!-- <button class="btn_modal" onclick="modalEdit.open()">
             Editar Device
           </button>
-          <button class="btn_modal" onclick="modalDelete.open()">
+          <button class="btn_modal" onclick="modalEdit.openDelete()">
             Excluir Device
           </button>
-          <button class="btn_modal" onclick="modalAddSala.open()">
+          <button class="btn_modal" onclick="modalEdit.openAddSala()">
             Adicionar Sala
           </button>
           <button class="btn_modal" onclick="modalDeleteSala.open()">
@@ -163,25 +163,25 @@
           <i onclick="modalEdit.close()" class="fi fi-sr-cross"></i>
         </div>
         <div class="header_tittle">
-          <h2 id="tittle_modal">Editar Device</h2>
+          <h2 id="tittle_modal_edit">Editar Device</h2>
         </div>
         <div class="container_edit">
-          <div class="left_add">
+        <div id="icone_modal" class="left_add">
             <i class="fi fi-rs-computer"></i>
           </div>
           <div class="right_add">
             <div class="container_father">
-              <div class="container_add">
+              <div id="container1" class="container_add">
                 <h2>Patrimônio</h2>
-                <input placeholder="Digite o patrimônio da máquina" type="text" id="iptPatrimonioNovo" />
+                <input placeholder="Digite o patrimônio da máquina" type="text" />
               </div>
-              <div class="container_add">
+              <div id="container2" class="container_add">
                 <h2>Hostname</h2>
                 <input placeholder="Digite o hostname da máquina" type="text" id="iptHostnameNovo" />
               </div>
-              <div class="container_add">
+              <div id="container3" class="container_add">
                 <h2>Sala</h2>
-                <select name="" id="iptSalaNova">
+                <select name="" id="">
                   <option value="null">Escolha uma sala</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -195,7 +195,10 @@
               </div>
             </div>
             <div class="container_button">
-              <button onclick="modalEdit.close()">Salvar</button>
+              <button id="btn_edit" style="display: none;" onclick="modalEdit.close()">Salvar</button>
+              <button id="btn_delete" style="display: none;" onclick="modalEdit.close()">Excluir</button>
+              <button id="btn_addSala" style="display: none;" onclick="modalEdit.close()">Adicionar</button>
+              <button id="btn_deleteSala" style="display: none;" onclick="modalEdit.close()">Excluir</button>
             </div>
           </div>
         </div>

@@ -409,6 +409,7 @@
   color: white;
   border-radius: 15px;
   border: none;
+  cursor: pointer;
 }
 
 /* estilização modal editar */

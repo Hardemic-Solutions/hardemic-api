@@ -3,7 +3,6 @@ const router = express.Router();
 
 const dashboardController = require("../controllers/dashboardController");
 
-
 router.get("/dadosgraph1", function (req, res) {
     dashboardController.graficoCpu(req, res);
 });
