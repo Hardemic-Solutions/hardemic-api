@@ -187,6 +187,7 @@
   function adicionarRotina() {
     const formData = new FormData();
     
+    console.log(arquivo.files[0]);
     formData.append('rotina', arquivo.files[0]);
     formData.append('descricao', descRotina.value);
     formData.append('nome', nomeRotina.value);
