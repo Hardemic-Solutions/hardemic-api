@@ -14,6 +14,7 @@ router.get("/:idEmpresa/rotinas/:idRotina", function (req, res) {
 });
 
 router.post("/:idEmpresa/rotinas", multer(multerConfig).single("rotina"), function (req, res) {
+  console.log('rec', req.file);
   rotinaController.store(req, res);
 });
 

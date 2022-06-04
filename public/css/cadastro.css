@@ -91,7 +91,7 @@ header a{
 
 .banner{
     background-image: url(../assets/hardware\ 2.webp);
-    height: 70vh;
+    height: 80vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -110,12 +110,13 @@ header a{
 }
 
 .cadastro .titulo{
-    margin-top: 10%;
+    margin-top: 5%;
     font-size: xx-large;
     font-weight: 400;
 }
 
 .ipts{
+    margin-top: 4%;
     width: 90%;
     height: 60%;
     display: flex;
@@ -125,23 +126,35 @@ header a{
 }
 
 .ipts .iptCadastro{
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    height: 60%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.txt_cad{
+    align-self: flex-start;
+    margin-left: 25%;
 }
 
 .iptCadastro input{
-    height: 30px;
+    width: 50%;
+    height: 80%;
     border-radius: 10px;
 }
 
 .cadastro .cadastrar{
-    margin-top: 5%;
+    margin-top: 8%;
     background-color: #3B83BD;
     color: white;
     font-weight: bold;
     border: none;
     border-radius: 60px;
-    height: 8%;
+    height: 10%;
     width: 40%;
     cursor: pointer;
     transition: 00.5s;
