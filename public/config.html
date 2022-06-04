@@ -135,7 +135,7 @@
 
                 <div class="container_metrica">
                   <label for="valor_cpu">Valor</label>
-                  <input id="valor_cpu" type="number" placeholder="Métrica">
+                  <input id="valor_cpu" max="100" type="number" placeholder="Métrica">
                 </div>
 
                 <div class="container toogle">
@@ -279,7 +279,7 @@
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        value: +value,
+        valor: +value,
         situacao: +situacao
       })
     }).then(res => {
