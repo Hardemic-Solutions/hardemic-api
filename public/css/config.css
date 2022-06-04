@@ -131,9 +131,13 @@ body {
 .container_options .container_toogle {
   display: flex; 
   justify-content: space-between; 
-  margin-top: 20px; 
+  margin-top: 30px; 
   align-items: center;
   padding: 0 40px;
+}
+
+.container_toogle div {
+  display: flex;
 }
 
 .toogle {
@@ -150,4 +154,40 @@ body {
   border: none;
   background-color: #03A062;
   color: white;
+  cursor: pointer;
+}
+
+.container_metrica{
+  display: flex;
+  align-items: center;
+  /* margin-right: 50%; */
+}
+
+.container_metrica input{
+  margin-left: 10px;
+  margin-right: 100px;
+  height: 14px;
+  border: none;
+  background-color: transparent;
+  outline: none; border-bottom: solid 3px #ccc;
+}
+
+@media screen and (max-width: 1150px) {
+  .container_toogle {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .container_toogle div {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container_metrica {
+    flex-direction: row;
+  }
+
+  .container_metrica input {
+    margin: 5px 0;
+  }
 }
