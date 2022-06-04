@@ -200,6 +200,18 @@
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.inputFile {
+  outline: none;
+  border: none;
+  background-color: #F6F6FA;
+  height: 35px;
+  font-size: 16px;
+  padding: auto 20px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .modal .container .groupinput span {
   height: 35px;
   flex: 1;
@@ -214,28 +226,18 @@
 }
 
 input[type="file"]{
-  outline: none;
-  border: none;
-  background-color: #F6F6FA;
-  height: 35px;
-  font-size: 16px;
-  border-radius: 20px;
-  text-transform: lowercase;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  width: 90%;
-  cursor: pointer;
+  display: none;
 }
 
 .modal .container .groupinput label.upload {
-  outline: none;
-  border: none;
-  background-color: #F6F6FA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 35px;
   font-size: 16px;
   border-radius: 20px;
   text-transform: lowercase;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  width: 100%!important;
   cursor: pointer;
 }
 

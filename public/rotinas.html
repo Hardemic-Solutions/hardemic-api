@@ -82,7 +82,7 @@
             </ul>
           </div>
         </div>
-        
+
         <!-- Adicionar rotina -->
 
         <div class="modal_rotina" class="add_box">
@@ -104,10 +104,11 @@
                 <textarea id="descRotina" type="text" rows="10"></textarea>
               </div>
               <div class="groupinput">
-                <label for="">Escolha um arquivo</label>
-                <span>
-                  <input id="arquivo" type="file"></input>
-                </span>
+                <label for="arquivo">Arquivo</label>
+
+                <label id="lblArquivo" class="upload" for="arquivo">Escolha um arquivo</label>
+
+                <input id="arquivo" onchange="previewFile(this.id)" type="file"></input>
               </div>
               <div>
                 <button onclick="adicionarRotina()" class="add_button" style="width: 100%;">Salvar</button>
@@ -137,10 +138,11 @@
                 <textarea id="editDescRotina" type="text" rows="10"></textarea>
               </div>
               <div class="groupinput">
-                <label for="">Escolha um arquivo</label>
-                <span>
-                  <input id="editArquivo" type="file"></input>
-                </span>
+                <label for="editArquivo">Arquivo</label>
+
+                <label class="upload" for="editArquivo">Escolha um arquivo</label>
+
+                <input id="editArquivo" onchange="previewFile(this.id)" style="display: none;" type="file"></input>
               </div>
               <div id="btn_editar">
               </div>
@@ -166,7 +168,7 @@
 
   function editarRotina(idRotina) {
     const formData = new FormData();
-    
+
     formData.append('rotina', editArquivo.files[0]);
     formData.append('descricao', editDescRotina.value);
     formData.append('nome', editNomeRotina.value);
@@ -179,14 +181,14 @@
       alert('Rotina alterada');
       modalRotina.close();
       location.reload();
-  }).catch(function (erro) {
-        console.log(erro);
-      });
+    }).catch(function (erro) {
+      console.log(erro);
+    });
   }
 
   function adicionarRotina() {
     const formData = new FormData();
-    
+
     console.log(arquivo.files[0]);
     formData.append('rotina', arquivo.files[0]);
     formData.append('descricao', descRotina.value);
@@ -200,9 +202,9 @@
       alert('Rotina adicionada');
       modalRotina.close();
       location.reload();
-  }).catch(function (erro) {
-        console.log(erro);
-      });
+    }).catch(function (erro) {
+      console.log(erro);
+    });
   }
 
   function excluirRotina(idRotina) {
@@ -211,9 +213,9 @@
     }).then(function () {
       alert('Rotina excluida com sucesso');
       location.reload();
-  }).catch(function (erro) {
-        console.log(erro);
-      });
+    }).catch(function (erro) {
+      console.log(erro);
+    });
   }
 
   function renderizarRotinas() {
@@ -241,17 +243,21 @@
                   </li>`;
           });
         });
-        
-      }else {
+
+      } else {
         console.log("Houve um erro ao tentar buscar os dados");
         resposta.text().then((texto) => {
           console.error(texto);
         });
       }
-  }).catch(function (erro) {
-        console.log(erro);
-      });
+    }).catch(function (erro) {
+      console.log(erro);
+    });
 
+  }
+
+  function previewFile(id) {
+    lblArquivo.innerHTML = document.getElementById(id).files[0].name;
   }
 
 </script>

@@ -136,6 +136,10 @@ body {
   padding: 0 40px;
 }
 
+.container_toogle div {
+  display: flex;
+}
+
 .toogle {
   position: relative;
   width: 74px; 
@@ -156,12 +160,34 @@ body {
 .container_metrica{
   display: flex;
   align-items: center;
+  /* margin-right: 50%; */
 }
 
 .container_metrica input{
-  margin-left: 4px;
+  margin-left: 10px;
+  margin-right: 100px;
   height: 14px;
   border: none;
   background-color: transparent;
   outline: none; border-bottom: solid 3px #ccc;
+}
+
+@media screen and (max-width: 1150px) {
+  .container_toogle {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .container_toogle div {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container_metrica {
+    flex-direction: row;
+  }
+
+  .container_metrica input {
+    margin: 5px 0;
+  }
 }
