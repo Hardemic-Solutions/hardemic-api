@@ -131,7 +131,7 @@ body {
 .container_options .container_toogle {
   display: flex; 
   justify-content: space-between; 
-  margin-top: 20px; 
+  margin-top: 30px; 
   align-items: center;
   padding: 0 40px;
 }
@@ -150,4 +150,18 @@ body {
   border: none;
   background-color: #03A062;
   color: white;
+  cursor: pointer;
+}
+
+.container_metrica{
+  display: flex;
+  align-items: center;
+}
+
+.container_metrica input{
+  margin-left: 4px;
+  height: 14px;
+  border: none;
+  background-color: transparent;
+  outline: none; border-bottom: solid 3px #ccc;
 }

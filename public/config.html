@@ -74,17 +74,6 @@
         <div style="display: flex; flex-direction: row; justify-content: space-around;">
 
           <div class="container_options">
-            <div class="container_toogle">
-              <h3>Alertas de ameaças</h3>
-              <div class="container toogle">
-                <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
-                </div>
-              </div>
-            </div>
-
 
             <div class="container_toogle">
               <h3>Alertas de atenção</h3>
@@ -133,26 +122,21 @@
               </div>
             </div>
 
-            <div class="container_toogle">
-              <h3>Rotina executada</h3>
-              <div class="container toogle">
-                <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- Segunda section -->
 
           <div class="container_options">
+
             <div class="container_toogle">
               <h3>CPU</h3>
+              <div class="container_metrica">
+                <label for="valor_cpu">Valor</label>
+                <input oninput="debounceUpdate(1)" id="valor_cpu" type="number" placeholder="Métrica">
+              </div>
               <div class="container toogle">
                 <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
+                  <input id="checkbox_cpu" type="checkbox" class="checkbox" />
                   <div class="knobs"></div>
                   <div class="layer"></div>
                 </div>
@@ -162,9 +146,13 @@
 
             <div class="container_toogle">
               <h3>RAM</h3>
+              <div class="container_metrica">
+                <label for="valor_ram">Valor</label>
+                <input oninput="debounceUpdate(1)" id="valor_ram" type="number" placeholder="Métrica">
+              </div>
               <div class="container toogle">
                 <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
+                  <input id="checkbox_ram" type="checkbox" class="checkbox" />
                   <div class="knobs"></div>
                   <div class="layer"></div>
                 </div>
@@ -172,45 +160,17 @@
             </div>
 
             <div class="container_toogle">
-              <span>
-                <h3>Disco</h3>
-              </span>
-
+              <h3>Disco</h3>
+              <div class="container_metrica">
+                <label for="valor_disco">Valor</label>
+                <input oninput="debounceUpdate(1)" id="valor_disco" type="number" placeholder="Métrica">
+              </div>
               <div class="container toogle">
                 <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
+                  <input id="checkbox_disco" type="checkbox" class="checkbox" />
                   <div class="knobs"></div>
                   <div class="layer"></div>
                 </div>
-              </div>
-            </div>
-
-            <div class="container_toogle">
-              <h3>Processos</h3>
-              <div class="container toogle">
-                <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="container_toogle">
-              <h3>Temperatura</h3>
-              <div class="container toogle">
-                <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="container_toogle">
-              <h3>Métricas</h3>
-              <div class="container toogle">
-                <button onclick="configurar()" class="btn_config">Configurar</button>
               </div>
             </div>
 
@@ -229,7 +189,26 @@
     document.querySelectorAll('.checkbox').forEach(check => check.checked = true)
   }
 
-  function configurar() {
-    window.location = 'metricas.html'
+  const debounce = (func, wait) => {
+    let timeout;
+
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
+
+  const debounceUpdate = debounce(update, 1000)
+
+  function update(idConfig) {
+    alert('foi' + idConfig)
   }
+
+
+  // get e put
 </script>
