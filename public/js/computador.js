@@ -85,41 +85,41 @@ function alterarMaquina() {
 
 }
 
-function deletarComputador() {
+// function deletarComputador() {
 
-    fetch("/instituicao/" + sessionStorage.ID_COMPUTADOR, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then(function (resposta) {
-        console.log("ESTOU NO THEN DO deletar()!")
+//     fetch("/instituicao/" + sessionStorage.ID_COMPUTADOR, {
+//         method: "DELETE",
+//         headers: {
+//             "Content-Type": "application/json"
+//         }
+//     }).then(function (resposta) {
+//         console.log("ESTOU NO THEN DO deletar()!")
 
-        if (resposta.ok) {
-            console.log(resposta);
+//         if (resposta.ok) {
+//             console.log(resposta);
 
-            resposta.json().then(json => {
-                console.log(json);
-                console.log(JSON.stringify(json));
+//             resposta.json().then(json => {
+//                 console.log(json);
+//                 console.log(JSON.stringify(json));
 
-                alert("Computador deletado com sucesso! ")
+//                 alert("Computador deletado com sucesso! ")
 
 
-            });
+//             });
 
-        } else {
+//         } else {
 
-            console.log("Houve um erro ao tentar deletar o computador");
+//             console.log("Houve um erro ao tentar deletar o computador");
 
-            resposta.text().then(texto => {
-                console.error(texto);
-                // finalizarAguardar(texto);
-            });
-        }
+//             resposta.text().then(texto => {
+//                 console.error(texto);
+//                 // finalizarAguardar(texto);
+//             });
+//         }
 
-    }).catch(function (erro) {
-        console.log(erro);
-    })
+//     }).catch(function (erro) {
+//         console.log(erro);
+//     })
 
-    return false;
-}
+//     return false;
+// }

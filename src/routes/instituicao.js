@@ -22,9 +22,5 @@ router.get("/listarComputadores", function (req, res) {
 router.put("/alterarMaquina/:id_computador", function (req, res) {
     usuarioController.alterarComputador(req, res)
 })
-router.delete("/:id_computador", function (req, res){
-    instituicaoController.deletarComputador(req, res)
-});
-
 
 module.exports = router;

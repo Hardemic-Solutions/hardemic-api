@@ -13,7 +13,7 @@ module.exports = {
       tb_chamado.status
         from tb_chamado 
       JOIN tb_computadores ON tb_computadores.id_computador = tb_chamado.fk_computador
-      WHERE tb_computadores.fk_empresa = ${fk_empresa};
+      WHERE tb_computadores.fk_empresa = ${fk_empresa} AND tb_computadores.deletado = 0;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

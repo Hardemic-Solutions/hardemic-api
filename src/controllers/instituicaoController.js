@@ -16,7 +16,7 @@ const instituicaoModel = require("../models/instituicaoModel");
 //     if (nomeSala == undefined) {
 //         res.status(400).send("Seu nome está undefined!");
 //     }  else {
-        
+
 //         instituicaoModel.cadastrarSala(nomeSala)
 //             .then(
 //                 function (resultado) {
@@ -37,7 +37,7 @@ const instituicaoModel = require("../models/instituicaoModel");
 // function deletarSala(req, res){
 //     const idSala = req.params.idSala
 
-    
+
 //     if (idSala == undefined) {
 //         res.status(400).send("id da sala está undefined!");
 //     }else{
@@ -68,15 +68,16 @@ function listarComputadores() {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+
 function cadastrarComputador(req, res) {
     var patrimonio = req.body.patrimonioServer;
     var hostname = req.body.hostnameServer;
 
     if (patrimonio == undefined || hostname == undefined) {
         res.status(400).send("Seu nome está undefined!");
-    }  else {
-        
-        instituicaoModel.cadastrarSala(hostname,patrimonio)
+    } else {
+
+        instituicaoModel.cadastrarSala(hostname, patrimonio)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -93,31 +94,7 @@ function cadastrarComputador(req, res) {
             );
     }
 }
-function deletarComputador(req, res){
-    const idComputador = req.params.idComputador;
 
-    
-    if (idComputador == undefined) {
-        res.status(400).send("id do computador está undefined!");
-    }else{
-        instituicaoModel.deletarSala(idSala)
-        .then(
-            function (resultado) {
-                res.json({ message: "Computador deletado com sucesso" });
-            }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                console.log(
-                    "\nHouve um erro ao deletar Computador! Erro: ",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-    }
-
-}
 function alterarComputador(req, res) {
     const id_computador = req.params.id_computador;
     const patrimonioNovo = req.body.patrimonioNovoServer;
@@ -132,21 +109,21 @@ function alterarComputador(req, res) {
         res.status(400).send("Sua senha antiga está undefined!");
     } else {
 
-        usuarioModel.alterarSenha(idUsuario, patrimonioNovo,hostnameNovo)
-Novo  .then(
-                function (resultado) {
-                    res.json({ message: "Senha alterada com sucesso" });
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
+        usuarioModel.alterarSenha(idUsuario, patrimonioNovo, hostnameNovo)
+        Novo.then(
+            function (resultado) {
+                res.json({ message: "Senha alterada com sucesso" });
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar o cadastro! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
     }
 }
 
@@ -156,6 +133,5 @@ module.exports = {
     // deletarSala,
     cadastrarComputador,
     listarComputadores,
-    deletarComputador,
     alterarComputador
 }

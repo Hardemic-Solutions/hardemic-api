@@ -84,7 +84,7 @@ function buscarInfoHardware(idComputador, local) {
   screen_tickets.style.display = 'none';
   screen_desc.style.display = 'flex';
 
-  fetch("/empresa/computadores/" + idComputador, {
+  fetch("/empresa/computadores/info/" + idComputador, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -119,7 +119,7 @@ function renderizarInfoHardware(InfoHardware, local) {
     boxDesc.innerHTML = `
       <div class="desc_header">
         <i onclick="showTickets()" class="fi fi-rr-arrow-left"></i>
-        <h1>Status <div class="light_stats"></div>
+        <h1>${InfoHardware[0].hostname}
         </h1>
         <h3>Device ${InfoHardware[0].fk_computador} </h3>
       </div>

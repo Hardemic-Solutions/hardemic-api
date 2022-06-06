@@ -62,17 +62,8 @@ function cadastrarComputador(hostname,patrimonio) {
     return database.executar(instrucao);
 }
 
-function deletarComputador(idComputador){
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idComputador);
-    var instrucao = `
-        DELETE FROM tb_computadores WHERE id_computador = ${idComputador};
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
-
 function alterarComputador(id_computador, patrimonioNovo, hostnameNovo) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function alterarSenha():",id_computador, patrimonioNovo, hostnameNovo);
+    console.log("ACESSEI A INSTITUICAO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function alterarSenha():",id_computador, patrimonioNovo, hostnameNovo);
     const instrucao = `
         UPDATE tb_computadores SET hostname = '${hostnameNovo}' WHERE id_computador = ${id_computador},
         UPDATE tb_computadores SET hostname = '${patrimonioNovo}' WHERE id_computador = ${id_computador};
@@ -87,6 +78,5 @@ module.exports = {
     // deletarSala,
     cadastrarComputador,
     listarComputadores,
-    deletarComputador,
     alterarComputador
 };

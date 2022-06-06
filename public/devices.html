@@ -23,7 +23,8 @@
   <title>Devices | Hardemic Solutions</title>
 
   <!-- Start of hardemicsolutions2684 Zendesk Widget script -->
-  <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=f6784618-cd62-4c14-9c7a-68cc4fdc0686"> </script>
+  <script id="ze-snippet"
+    src="https://static.zdassets.com/ekr/snippet.js?key=f6784618-cd62-4c14-9c7a-68cc4fdc0686"> </script>
   <!-- End of hardemicsolutions2684 Zendesk Widget script -->
 </head>
 
@@ -121,6 +122,7 @@
           </div>
           <canvas class="line-chart3"></canvas>
         </div>
+
         <!-- tela add device -->
         <div id="dashAdd" style="display: none" class="add_box">
           <div class="left_add">
@@ -138,21 +140,24 @@
               </div>
               <div class="container_add">
                 <h2>Sala</h2>
-                <select name="" id="iptSala">
-                  <option value="null">Escolha uma sala</option>
-                  <option value="1A">1A</option>
-                  <option value="1B">1B</option>
-                  <option value="2A">2A</option>
-                  <option value="2B">2B</option>
-                  <option value="3A">3A</option>
-                  <option value="3B">3B</option>
-                  <option value="4A">4A</option>
-                  <option value="4B">4B</option>
+                <select id="salaAdd">
+                  <option value="null">Escolha a sala</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
                 </select>
               </div>
             </div>
             <div class="container_button">
-              <button onclick="modalDash.close()">Salvar</button>
+              <button onclick="modalDash.verificaSeAdiciona(iptPatrimonio.value, iptHostname.value, salaAdd.value, devicesFuncAdicionar)">Adicionar</button>
             </div>
           </div>
         </div>
@@ -170,36 +175,37 @@
           <h2 id="tittle_modal_edit">Editar Device</h2>
         </div>
         <div class="container_edit">
-        <div id="icone_modal" class="left_add">
+          <div id="icone_modal" class="left_add">
             <i class="fi fi-rs-computer"></i>
           </div>
           <div class="right_add">
             <div class="container_father">
               <div id="container1" class="container_add">
                 <h2>Patrimônio</h2>
-                <input placeholder="Digite o patrimônio da máquina" type="text" />
               </div>
               <div id="container2" class="container_add">
                 <h2>Hostname</h2>
-                <input placeholder="Digite o hostname da máquina" type="text" id="iptHostnameNovo" />
               </div>
               <div id="container3" class="container_add">
                 <h2>Sala</h2>
-                <select name="" id="">
-                  <option value="null">Escolha uma sala</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
+                <select id="sala">
+                  <option value="1">2A</option>
+                  <option value="2">2B</option>
+                  <option value="3">3A</option>
+                  <option value="4">3B</option>
+                  <option value="5">4A</option>
+                  <option value="6">4B</option>
+                  <option value="7">5A</option>
+                  <option value="8">5B</option>
+                  <option value="9">6A</option>
+                  <option value="10">6B</option>
+                  <option value="11">7A</option>
                 </select>
               </div>
             </div>
             <div class="container_button">
-              <button id="btn_edit" style="display: none;" onclick="modalEdit.close()">Salvar</button>
+              <button id="btn_edit" style="display: none;"
+                onclick="modalEdit.alterarSala(idComputadorFuncAlterar, sala.value)">Salvar</button>
               <button id="btn_delete" style="display: none;" onclick="modalEdit.close()">Excluir</button>
               <button id="btn_addSala" style="display: none;" onclick="modalEdit.close()">Adicionar</button>
               <button id="btn_deleteSala" style="display: none;" onclick="modalEdit.close()">Excluir</button>
@@ -226,6 +232,11 @@
   let labels2 = [];
   let counterIndex = 0;
   let counterIndex2 = 0;
+  // variaveis para alterar sala
+  let idComputadorFuncAlterar
+  let salaFuncAlterar
+  // variaveis para adicionar devies
+  let devicesFuncAdicionar
 
   const socket = io("http://localhost:3333");
 
@@ -273,9 +284,7 @@
         if (resposta.ok) {
           resposta.json().then((json) => {
             console.log(json);
-            let devices = json
-            connection.innerHTML = devices.length
-            console.log('esse foi o resultado: ' + devices.length);
+            devices = json
             renderizarDevices(devices);
           });
         } else {
@@ -302,23 +311,23 @@
       box_devices.innerHTML += `
                  <div class="devices">
                     <div class="dvc_left">
-                        <i onclick="modalDash.open()" class="fi fi-rr-computer"></i>
+                        <i onclick="modalDash.open(${item.id_computador},'${item.hostname}')" class="fi fi-rr-computer"></i>
                     </div>
                     <div class="dvc_right">
                         <h3>Hostname:</h3>
                         <h3>${item.hostname}</h3>
-                        <h3>Sala: ${item.fk_sala}</h3>
+                        <h3>Status: <span id="status_${item.id_computador}">Desconectado</span></h3>
                     </div>
                     <div class="options">
-                        <i onclick="modalEdit.open()" class="fi fi-sr-pencil"></i>
-                        <i onclick="deleteDevice()" class="fi fi-sr-trash"></i>
+                        <i onclick="modalEdit.open(${item.id_computador}, '${item.patrimonio}', '${item.hostname}')" class="fi fi-sr-pencil"></i>
+                        <i onclick="deleteDevice(${item.id_computador})" class="fi fi-sr-trash"></i>
                     </div>
                 </div>
             `;
     });
 
     box_devices.innerHTML += `
-            <div class="add_devices" onclick="modalDash.open_add()">
+            <div class="add_devices" onclick="modalDash.buscaDevices(${sessionStorage.ID_EMPRESA})">
                 <div class="dvc_left">
                     <i class="fi fi-rr-computer"></i>
                 </div>
@@ -335,8 +344,8 @@
 
   const ctx = document.getElementsByClassName("line-chart1");
 
-  function atualizargraficoCpu() {
-    fetch("/dashboardRoutes/dadosgraph1", {
+  function atualizarGraficoCpu(fk_computador) {
+    fetch("/dashboardRoutes/dadosgraph1/" + fk_computador, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -365,7 +374,8 @@
             // yValue1.push(Math.random() * 10);
 
             window.chart1.update();
-            setTimeout(() => atualizargraficoCpu(), 2000)
+            clearTimeout(window.timeoutCpu)
+            window.timeoutCpu = setTimeout(() => atualizarGraficoCpu(fk_computador), 2000)
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
@@ -382,8 +392,8 @@
     return false;
   }
 
-  function rendezarizargraficoCpu() {
-    fetch("/dashboardRoutes/dadosgraph1", {
+  function renderizarGraficoCpu(fk_computador) {
+    fetch("/dashboardRoutes/dadosgraph1/" + fk_computador, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -396,6 +406,9 @@
 
           resposta.json().then((json) => {
             // console.log(json);
+
+            labels = []
+            yValue1 = []
             json.forEach(obj => {
               labels.push(counterIndex++);
               yValue1.push(obj.cpu);
@@ -430,22 +443,17 @@
                   text: ''
                 },
                 scales: {
-                  yAxes: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    ticks: {
-                      beginAtZero: true,
-                      max: 100,
-                      min: 0
-                    }
+                  y: {
+                    beginAtZero: true,
+                    max: 100,
+                    min: 0,
                   }
-
                 }
 
               }
             });
-            setTimeout(() => atualizargraficoCpu(), 2000);
+            clearTimeout(window.timeoutCpu)
+            window.timeoutCpu = setTimeout(() => atualizarGraficoCpu(fk_computador), 2000);
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
@@ -462,10 +470,8 @@
 
   }
 
-  // rendezarizargraficoCpu()
-
-  function atualizargraficoRam() {
-    fetch("/dashboardRoutes/dadosgraph2", {
+  function atualizarGraficoRam(fk_computador) {
+    fetch("/dashboardRoutes/dadosgraph2/" + fk_computador, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -486,7 +492,7 @@
             // yValue1.push(Math.random() * 10);
 
             window.chart2.update();
-            setTimeout(() => atualizargraficoRam(), 2000)
+            window.timeoutRam = setTimeout(() => atualizarGraficoRam(fk_computador), 2000)
 
           });
         } else {
@@ -507,8 +513,8 @@
 
   // ////// grafico ram
 
-  function rendezarizargraficoRam() {
-    fetch("/dashboardRoutes/dadosgraph2", {
+  function renderizarGraficoRam(fk_computador) {
+    fetch("/dashboardRoutes/dadosgraph2/" + fk_computador, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -523,7 +529,7 @@
           resposta.json().then((json) => {
             console.log(json);
 
-
+            yValue2 = []
             yValue2.push(json[0].ramDisponivel, json[0].ram);
 
             // yValue1.push([85, 96, 98, 95]);
@@ -559,7 +565,8 @@
                 }
               }
             });
-            setTimeout(() => atualizargraficoRam(), 2000);
+            clearTimeout(window.timeoutRam)
+            window.timeoutRam = setTimeout(() => atualizarGraficoRam(fk_computador), 2000);
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
@@ -573,12 +580,11 @@
         console.log(erro);
       });
   }
-  // rendezarizargraficoRam()
 
   // ////// grafico disco
 
-  function atualizargraficoDisco() {
-    fetch("/dashboardRoutes/dadosgraph3", {
+  function atualizarGraficoDisco(fk_computador) {
+    fetch("/dashboardRoutes/dadosgraph3/" + fk_computador, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -600,7 +606,7 @@
             // yValue1.push(Math.random() * 10);
 
             window.chart3.update();
-            setTimeout(() => atualizargraficoDisco(), 2000)
+            window.timeoutDisco = setTimeout(() => atualizarGraficoDisco(fk_computador), 2000)
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
@@ -619,8 +625,8 @@
     return false;
   }
 
-  function rendezarizargraficoDisco() {
-    fetch("/dashboardRoutes/dadosgraph3", {
+  function renderizarGraficoDisco(fk_computador) {
+    fetch("/dashboardRoutes/dadosgraph3/" + fk_computador, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -635,6 +641,7 @@
           resposta.json().then((json) => {
             console.log(json);
 
+            yValue3 = []
             yValue3.push(json[0].discoDisponivel, json[0].armazenamento);
 
             // yValue1.push([85, 96, 98, 95]);
@@ -671,7 +678,8 @@
                 }
               }
             });
-            setTimeout(() => atualizargraficoDisco(), 2000);
+            clearTimeout(window.timeoutDisco)
+            window.timeoutDisco = setTimeout(() => atualizarGraficoDisco(fk_computador), 2000);
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
@@ -686,14 +694,6 @@
       });
   }
 
-  // rendezarizargraficoDisco();
-
-  // setTimeout(() => {
-  //   graficoDisco();
-  //   window.chart3.update()
-  // }, 2000);
-
-  // pegar quantidades de computadores no banco
 
 
 </script>

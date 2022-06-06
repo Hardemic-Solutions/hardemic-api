@@ -29,7 +29,3 @@ function meuPerfil() {
 function editDevice() {
     window.alert('chamar modal de editar')
 }
-
-function deleteDevice() {
-    window.alert('chamar rota de deletar')
-}
