@@ -56,17 +56,58 @@ const modalDash = {
 
     },
     verificaSeAdiciona(patrimonioAdd, hostnameAdd, salaAdd, devicesAdd) {
-        if (patrimonioAdd != null && hostnameAdd != null) {
 
+        if (patrimonioAdd != null && hostnameAdd != null) {
             const deviceJaExiste = devicesAdd.find(elemento =>
                 elemento.patrimonio == patrimonioAdd && elemento.hostname == hostnameAdd
-            ); 
+            );
             if (deviceJaExiste) {
-
+                fetch("/empresa/computador/reativardevice/", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        patrimonioDeviceServer: patrimonioAdd,
+                        hostnameDeviceServer: hostnameAdd,
+                    })
+                }).then(function (resposta) {
+                    if (resposta.ok) {
+                        alert("Computador adicionado com sucesso!")
+                        window.location.reload()
+                    } else {
+                        console.log("Houve um erro ao tentar adicionar a Computador");
+                        resposta.text().then(texto => {
+                            console.error(texto);
+                        });
+                    }
+                }).catch(function (erro) {
+                    console.log(erro);
+                })
             } else {
-                
-            }
+                fetch('/empresa/computador/adicionardevice', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        patrimonioServer: patrimonioAdd,
+                        hostnameServer: hostnameAdd,
+                        salaServer: salaAdd,
+                        empresaServer: sessionStorage.ID_EMPRESA,
+                    })
+                }).then(function (resposta) {
+                    if (resposta.ok) {
+                        window.alert("Cadastro realizado com sucesso!");
+                        window.location.reload()
+                    } else {
+                        throw ("Houve um erro ao tentar adicionar o device!");
+                    }
+                }).catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
 
+            }
         } else {
             alert('Dados incorretos!')
         }

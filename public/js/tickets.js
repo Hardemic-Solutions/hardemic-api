@@ -60,6 +60,11 @@ function renderizarChamados(chamados) {
             </div>
             <div class="box_info_devices">
               <h3>
+                ${item.nome_sala}
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
                 ${item.descricao}
               </h3>
             </div>
@@ -128,13 +133,10 @@ function renderizarInfoHardware(InfoHardware, local) {
           Tipo <h3>Computador </h3>
         </div>
         <div class="column_left">
-          Local <h3>${local} </h3>
+          Local <h3>${InfoHardware[0].nome_sala} </h3>
         </div>
         <div class="column_left">
           SO <h3>${InfoHardware[0].SO} </h3>
-        </div>
-        <div class="column_left">
-          CPU <h3>${InfoHardware[0].SO} </h3>
         </div>
         <div class="column_left">
           Ram <h3>${InfoHardware[0].ram} </h3>

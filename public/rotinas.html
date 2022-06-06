@@ -82,7 +82,7 @@
             </ul>
           </div>
         </div>
-        
+
         <!-- Adicionar rotina -->
 
         <div class="modal_rotina" class="add_box">
@@ -166,7 +166,7 @@
 
   function editarRotina(idRotina) {
     const formData = new FormData();
-    
+
     formData.append('rotina', editArquivo.files[0]);
     formData.append('descricao', editDescRotina.value);
     formData.append('nome', editNomeRotina.value);
@@ -179,14 +179,14 @@
       alert('Rotina alterada');
       modalRotina.close();
       location.reload();
-  }).catch(function (erro) {
-        console.log(erro);
-      });
+    }).catch(function (erro) {
+      console.log(erro);
+    });
   }
 
   function adicionarRotina() {
     const formData = new FormData();
-    
+
     console.log(arquivo.files[0]);
     formData.append('rotina', arquivo.files[0]);
     formData.append('descricao', descRotina.value);
@@ -200,9 +200,9 @@
       alert('Rotina adicionada');
       modalRotina.close();
       location.reload();
-  }).catch(function (erro) {
-        console.log(erro);
-      });
+    }).catch(function (erro) {
+      console.log(erro);
+    });
   }
 
   function excluirRotina(idRotina) {
@@ -211,9 +211,9 @@
     }).then(function () {
       alert('Rotina excluida com sucesso');
       location.reload();
-  }).catch(function (erro) {
-        console.log(erro);
-      });
+    }).catch(function (erro) {
+      console.log(erro);
+    });
   }
 
   function renderizarRotinas() {
@@ -241,16 +241,16 @@
                   </li>`;
           });
         });
-        
-      }else {
+
+      } else {
         console.log("Houve um erro ao tentar buscar os dados");
         resposta.text().then((texto) => {
           console.error(texto);
         });
       }
-  }).catch(function (erro) {
-        console.log(erro);
-      });
+    }).catch(function (erro) {
+      console.log(erro);
+    });
 
   }
 

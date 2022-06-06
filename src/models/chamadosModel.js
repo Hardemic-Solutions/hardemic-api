@@ -10,9 +10,11 @@ module.exports = {
       tb_chamado.id_chamado,
       tb_computadores.hostname,
       tb_chamado.descricao,
-      tb_chamado.status
+      tb_chamado.status,
+      tb_salas.nome_sala
         from tb_chamado 
       JOIN tb_computadores ON tb_computadores.id_computador = tb_chamado.fk_computador
+      JOIN tb_salas ON tb_salas.id_sala = tb_computadores.id_computador
       WHERE tb_computadores.fk_empresa = ${fk_empresa} AND tb_computadores.deletado = 0;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
