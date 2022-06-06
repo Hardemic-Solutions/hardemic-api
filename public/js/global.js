@@ -25,3 +25,7 @@ function exit() {
 function meuPerfil() {
     window.location = 'perfil.html';
 }
+
+function editDevice() {
+    window.alert('chamar modal de editar')
+}
