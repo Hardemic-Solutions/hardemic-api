@@ -74,28 +74,6 @@
         <div style="display: flex; flex-direction: row; justify-content: space-around;">
 
           <div class="container_options">
-            <div class="container_toogle">
-              <h3>Alertas de ameaças</h3>
-              <div class="container toogle">
-                <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="container_toogle">
-              <h3>Alertas de atenção</h3>
-              <div class="container toogle">
-                <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
-                </div>
-              </div>
-            </div>
 
             <div class="container_toogle">
               <span>
@@ -104,7 +82,7 @@
 
               <div class="container toogle">
                 <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
+                  <input type="checkbox" class="checkbox" id="alerta_recursos" />
                   <div class="knobs"></div>
                   <div class="layer"></div>
                 </div>
@@ -115,7 +93,7 @@
               <h3>Tickets novos</h3>
               <div class="container toogle">
                 <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
+                  <input type="checkbox" class="checkbox" id="alerta_tickets_novos" />
                   <div class="knobs"></div>
                   <div class="layer"></div>
                 </div>
@@ -126,7 +104,7 @@
               <h3>Lembrete de tickets pendentes</h3>
               <div class="container toogle">
                 <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
+                  <input type="checkbox" class="checkbox" id="alerta_tickets_pendentes" />
                   <div class="knobs"></div>
                   <div class="layer"></div>
                 </div>
@@ -134,27 +112,38 @@
             </div>
 
             <div class="container_toogle">
-              <h3>Rotina executada</h3>
+              <h3>Rotina baixada</h3>
               <div class="container toogle">
                 <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
+                  <input type="checkbox" class="checkbox" id="alerta_rotina" />
                   <div class="knobs"></div>
                   <div class="layer"></div>
                 </div>
               </div>
             </div>
+
           </div>
 
           <!-- Segunda section -->
 
           <div class="container_options">
+
             <div class="container_toogle">
               <h3>CPU</h3>
-              <div class="container toogle">
-                <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
+              <div>
+
+
+                <div class="container_metrica">
+                  <label for="valor_cpu">Valor</label>
+                  <input id="valor_cpu" max="100" type="number" placeholder="Métrica">
+                </div>
+
+                <div class="container toogle">
+                  <div class="button r button-toogle">
+                    <input id="checkbox_cpu" type="checkbox" class="checkbox" />
+                    <div class="knobs"></div>
+                    <div class="layer"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -162,62 +151,81 @@
 
             <div class="container_toogle">
               <h3>RAM</h3>
-              <div class="container toogle">
-                <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
+              <div>
+
+                <div class="container_metrica">
+                  <label for="valor_ram">Valor</label>
+                  <input id="valor_ram" type="number" placeholder="Métrica">
+                </div>
+
+
+                <div class="container toogle">
+                  <div class="button r button-toogle">
+                    <input id="checkbox_ram" type="checkbox" class="checkbox" />
+                    <div class="knobs"></div>
+                    <div class="layer"></div>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="container_toogle">
-              <span>
-                <h3>Disco</h3>
-              </span>
+              <h3>Disco</h3>
+              <div>
 
-              <div class="container toogle">
-                <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
+
+                <div class="container_metrica">
+                  <label for="valor_disco">Valor</label>
+                  <input id="valor_disco" type="number" placeholder="Métrica">
+                </div>
+
+                <div class="container toogle">
+                  <div class="button r button-toogle">
+                    <input id="checkbox_disco" type="checkbox" class="checkbox" />
+                    <div class="knobs"></div>
+                    <div class="layer"></div>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="container_toogle">
-              <h3>Processos</h3>
-              <div class="container toogle">
-                <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
+              <h3>GPU</h3>
+              <div>
+                <div class="container_metrica">
+                  <label for="valor_gpu">Valor</label>
+                  <input id="valor_gpu" type="number" placeholder="Métrica">
+                </div>
+
+                <div class="container toogle">
+                  <div class="button r button-toogle">
+                    <input id="checkbox_gpu" type="checkbox" class="checkbox" />
+                    <div class="knobs"></div>
+                    <div class="layer"></div>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="container_toogle">
               <h3>Temperatura</h3>
-              <div class="container toogle">
-                <div class="button r button-toogle">
-                  <input type="checkbox" class="checkbox" />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
+              <div>
+                <div class="container_metrica">
+                  <label for="valor_temp">Valor</label>
+                  <input id="valor_gpu" type="number" placeholder="Métrica">
+                </div>
+
+                <div class="container toogle">
+                  <div class="button r button-toogle">
+                    <input id="checkbox_temp" type="checkbox" class="checkbox" />
+                    <div class="knobs"></div>
+                    <div class="layer"></div>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <div class="container_toogle">
-              <h3>Métricas</h3>
-              <div class="container toogle">
-                <button onclick="configurar()" class="btn_config">Configurar</button>
-              </div>
-            </div>
-
           </div>
         </div>
-
-
       </div>
     </div>
   </div>
@@ -226,10 +234,58 @@
 </html>
 <script>
   window.onload = () => {
-    document.querySelectorAll('.checkbox').forEach(check => check.checked = true)
+    (() => {
+      fetch(`http://localhost:3333/empresa/${sessionStorage.ID_EMPRESA}/config`, {
+        method: 'GET'
+      }).then(response => {
+        response.json().then(json => {
+          console.log(json)
+          json.forEach(config => {
+            let check = document.getElementById(`checkbox_${config.nome_config.split('_').at(-1)}`)
+            let input = document.getElementById(`valor_${config.nome_config.split('_').at(-1)}`)
+
+            if (check) {
+              check.checked = config.situacao;
+              input.value = config.valor;
+              check.oninput = () => debounceUpdate(config.id_config, input.value, check.checked)
+              input.oninput = () => debounceUpdate(config.id_config, input.value, check.checked)
+            }
+          });
+        })
+      })
+    })()
   }
 
-  function configurar() {
-    window.location = 'metricas.html'
+  const debounce = (func, wait) => {
+    let timeout;
+
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
+
+  const debounceUpdate = debounce(update, 1000)
+
+  function update(idConfig, value, situacao) {
+    fetch(`http://localhost:3333/empresa/${sessionStorage.ID_EMPRESA}/config/${idConfig}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        valor: +value,
+        situacao: +situacao
+      })
+    }).then(res => {
+      if (res.ok) {
+        alert("Atualizado com sucesso")
+      }
+    }).catch(err => console.error('Erro ao atualizar configuração', err))
   }
 </script>
