@@ -21,23 +21,23 @@
     <div class="box_all">
 
         <div class="navegation_bar">
-            <div  onclick="goToDevices()" class="box_bar">
+            <div onclick="goToDevices()" class="box_bar">
                 <a>Devices</a>
                 <i class="fi fi-rr-screen"></i>
             </div>
-            <div  onclick="goToDash()" class="box_bar">
+            <div onclick="goToDash()" class="box_bar">
                 <a>Dash</a>
                 <i class="fi fi-rr-stats"></i>
             </div>
-            <div  onclick="goToTickets()" class="box_bar">
+            <div onclick="goToTickets()" class="box_bar">
                 <a>Tickets</a>
                 <i class="fi fi-rr-ticket"></i>
             </div>
-            <div  onclick="goToRotinas()" class="box_bar">
+            <div onclick="goToRotinas()" class="box_bar">
                 <a>Rotinas</a>
                 <i class="fi fi-rr-calendar"></i>
             </div>
-            <div  onclick="goToConfig()" class="box_bar">
+            <div onclick="goToConfig()" class="box_bar">
                 <a>Configurações</a>
                 <i class="fi fi-rr-settings"></i>
             </div>
@@ -60,6 +60,11 @@
             </div>
             <div class="box_account">
                 <div class="account_left">
+
+
+
+                </div>
+                <div class="account_right">
                     <div class="alterar_senha">
                         <h2 class="titulo_senha">
                             Alterar Senha
@@ -73,31 +78,35 @@
                             <h4>Nova senha:</h4>
                             <input type="text" name="" id="ipt_senha_nova" placeholder="Nova senha">
                         </div>
-                        
+
                         <div class="ipt_alterar_senha">
                             <h4>Confirme sua nova senha:</h4>
-                            <input type="text" name="" id="ipt_senha_nova_confirm" placeholder="Nova senha">
+                            <input type="text" name="" id="ipt_senha_nova_confirm"
+                                placeholder="Digitar novamente a senha">
                         </div>
 
                         <button class="btn_salvar" onclick="alterarSenha()">Salvar Senha</button>
                     </div>
-                </div>
-                <div class="account_right">
-                    <h2 id="tittle_delete">Deseja excluir sua conta?</h2>
-                    <button id="btn_delete" class="delete" onclick="deleteAcc()">Excluir conta</button>
-                    <div id="are_sure" style="display: none;" class="are_you_sure">
-                        <button onclick="cancel()" class="btn_cancel" >Cancelar</button>
-                        <button class="delete" onclick="deletar()">Excluir</button>
+
+                    <div class="deletar_conta">
+                        <h2 class="tittle" id="tittle_delete">Deseja excluir sua conta?</h2>
+                        <button id="btn_delete" class="btn_del" onclick="deleteAcc()">Excluir conta</button>
+                        <div id="are_sure" style="display: none;" class="are_you_sure">
+                            <button onclick="cancel()" class="btn_cancel">Cancelar</button>
+                            <button onclick="deletar()" class="btn_delete">Excluir</button>
+                        </div>
                     </div>
+
                 </div>
-            </div>                
+            </div>
         </div>
     </div>
 </body>
+
 </html>
 <script>
 
-    function  deleteAcc() {
+    function deleteAcc() {
         tittle_delete.innerHTML = 'Você tem certeza?';
         btn_delete.style.display = 'none';
         are_sure.style.display = 'flex';

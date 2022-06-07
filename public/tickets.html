@@ -67,10 +67,16 @@
           <!-- tittle columns -->
           <div class="tb_header">
             <div class="box_header">
-              <h2>Device</h2>
+              <h2>ID chamado</h2>
             </div>
             <div class="box_header">
-              <h2>Status</h2>
+              <h2>Hostname</h2>
+            </div>
+            <div class="box_header">
+              <h2>Sala</h2>
+            </div>
+            <div class="box_header">
+              <h2>Descrição</h2>
             </div>
             <div class="box_header">
               <h2>Situação</h2>
@@ -121,40 +127,3 @@
     </div>
   </div>
 </body>
-<script>
-
-function renderizarDevices() {
-    const rowDevices = document.querySelector(".tb_tickets");
-    for (let i = 0; i < 5; i++) {
-      rowDevices.innerHTML += `
-      <div class="rows_devices">
-            <div class="box_info_devices">
-              <h3>
-                Dev 12
-              </h3>
-            </div>
-            <div class="box_info_devices">
-              <h3>
-                On
-              </h3>
-            </div>
-            <div class="box_info_devices">
-              <h3>
-                Pendente
-              </h3>
-            </div>
-            <div class="box_info_devices">
-              <h3>Detalhes...</h3>
-              <i onclick="showDesc()" class="fi fi-rr-info"></i>
-            </div>
-          </div>
-            `;
-    }
-};
-
-window.onload = function () {
-  renderizarDevices();
-};
-
-
-</script>

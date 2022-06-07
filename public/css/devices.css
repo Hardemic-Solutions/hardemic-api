@@ -17,8 +17,8 @@
   margin: 1% 0 1% 10%;
   float: left;
   display: flex;
-  height: 20%;
-  width: 20%;
+  height: 23%;
+  width: 21%;
   background-color: #121212;
   border-radius: 25px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 7);
@@ -26,14 +26,10 @@
   cursor: pointer;
 }
 
-.devices:hover {
-  transform: scale(1.03);
-}
-
 .dvc_left {
   display: flex;
   height: 100%;
-  width: 35%;
+  width: 30%;
   align-items: center;
   justify-content: center;
 }
@@ -41,9 +37,47 @@
 .dvc_right {
   display: flex;
   height: 100%;
-  width: 65%;
+  width: 70%;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.options {
+  display: none;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.options i {
+  display: flex;
+  height: 40%;
+  width: 40%;
+  justify-content: center;
+  align-items: center;
+  color: #03a062;
+  font-size: 40px;
+}
+
+.devices:hover {
+  transform: scale(1.01);
+}
+
+.devices:hover .options {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 50%;
+}
+
+.devices:hover .options i {
+  border: solid 1px #03A062;
+  border-radius: 5px;
+}
+
+.devices:hover .dvc_right {
+  display: none;
+  height: 0%;
+  width: 0%;
 }
 
 .box_status {
@@ -53,7 +87,7 @@
   width: 100%;
 }
 
-.devices i {
+.devices .dvc_left i {
   color: #03a062;
   font-size: 75px;
   margin-top: 8%;
@@ -62,7 +96,12 @@
 .devices h3 {
   align-self: flex-start;
   color: #f2f2f2;
+  font-weight: 100;
   font-size: medium;
+}
+
+.devices span {
+  color: #03a062;
 }
 
 .dvc_status {
@@ -97,7 +136,7 @@
 }
 
 .modal {
-  background: #000000;
+  background: #121212;
   position: relative;
   height: 100%;
   width: 90%;
@@ -150,13 +189,53 @@
   align-items: center;
 }
 
+.subtitle {
+  display: flex;
+  box-sizing: border-box;
+  height: 75%;
+  width: 20%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subtitle h1 {
+  margin-top: 15%;
+  height: 20%;
+  width: 45%;
+}
+
+.subtitle span {
+  display: flex;
+  height: 33%;
+  width: 60%;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.used {
+  margin-left: 30%;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  background-color: #03a062;
+}
+
+.empty {
+  margin-left: 10%;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+}
+
 /* estilização box add device */
 
 .add_devices {
   margin: 1% 0 1% 10%;
   float: left;
   display: flex;
-  height: 20%;
+  height: 23%;
   width: 20%;
   background-color: #3b83bd;
   border-radius: 25px;
@@ -184,7 +263,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  font-size: medium;
 }
 
 .add_box {
@@ -249,8 +327,8 @@
 }
 
 .container_add select {
-  height: 45%;
-  width: 55%;
+  height: 30%;
+  width: 57%;
   color: black;
   border: none;
   border-radius: 15px;
@@ -296,18 +374,19 @@
 .line-chart1 {
   width: 65% !important;
   height: 95% !important;
-  background-color: #f2f2f2;
   border-radius: 5px;
 }
 
 .line-chart2 {
   width: 20% !important;
-  height: 80% !important;
+  height: 75% !important;
+  border-radius: 5px;
 }
 
 .line-chart3 {
   width: 20% !important;
-  height: 80% !important;
+  height: 75% !important;
+  border-radius: 5px;
 }
 
 /* estilização botões modal */
@@ -355,7 +434,7 @@
 }
 
 .modal_editar {
-  background: #000000;
+  background: #121212;
   position: relative;
   height: 60%;
   width: 50%;
