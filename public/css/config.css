@@ -160,12 +160,11 @@ body {
 .container_metrica{
   display: flex;
   align-items: center;
-  /* margin-right: 50%; */
 }
 
 .container_metrica input{
   margin-left: 10px;
-  margin-right: 100px;
+  margin-right: 40px;
   height: 14px;
   border: none;
   background-color: transparent;
