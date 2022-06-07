@@ -15,7 +15,7 @@ router.use("/empresa", require("./alertas"));
 router.use("/empresa", require('./configs'));
 router.use("/empresa", require('./chamados'));
 router.use("/empresa", require("./computadores"));
+router.use("/empresa", require("./logs"))
 router.use("/dashboardRoutes", require("./dashboardRoutes"));
-
 
 module.exports = router;

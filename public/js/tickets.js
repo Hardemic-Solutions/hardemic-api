@@ -2,6 +2,9 @@ window.onload = function () {
   buscarChamadosBanco();
 };
 
+moment.tz.setDefault("America/Sao_Paulo");
+var momentData = moment().diff(moment(dataLogs));
+
 function showTickets() {
   screen_tickets.style.display = 'flex';
   screen_desc.style.display = 'none';
@@ -105,7 +108,7 @@ function renderizarChamados(chamados) {
             </div>
           </div>
             `;
-    }else if (item.status == "PROGRESSO") {
+    } else if (item.status == "PROGRESSO") {
 
       rowDevices.innerHTML += `
           <div class="rows_devices">
@@ -198,11 +201,9 @@ function buscarInfoHardware(idComputador, local) {
       "Content-Type": "application/json",
     }
   })
-
     .then(function (resposta) {
       if (resposta.ok) {
         resposta.json().then((json) => {
-          console.log(json)
           let InfoHardware
           InfoHardware = json
           renderizarInfoHardware(InfoHardware, local)
@@ -224,7 +225,11 @@ function buscarInfoHardware(idComputador, local) {
 function renderizarInfoHardware(InfoHardware, local) {
   const boxDesc = document.querySelector(".box_desc_device");
 
-  boxDesc.innerHTML = `
+  fetch("http://localhost:3333/empresa/logs/" + InfoHardware[0].fk_computador)
+    .then(res => {
+      res.json().then(json => {
+        console.log("JSON", json)
+        boxDesc.innerHTML = `
       <div class="desc_header">
         <i onclick="showTickets()" class="fi fi-rr-arrow-left"></i>
         <h1>${InfoHardware[0].hostname}
@@ -242,17 +247,34 @@ function renderizarInfoHardware(InfoHardware, local) {
           SO <h3>${InfoHardware[0].SO} </h3>
         </div>
         <div class="column_left">
-          Ram <h3>${InfoHardware[0].ram} </h3>
+          Ram <h3>${InfoHardware[0].ram + "MB"} </h3>
         </div>
         <div class="column_left">
-          Disco <h3>${InfoHardware[0].armazenamento} </h3>
+          Disco <h3>${InfoHardware[0].armazenamento + "MB"} </h3>
         </div>
       </div>
         <div class="desc_right">
           <div class="tittle_right">Logs</div>
           <div class="logs_device">
+          
+           </div>
         </div>
-      </div>
     `;
+        json.forEach(log => {
+          console.log('log', log)
+          document.querySelector('.logs_device').innerHTML += `
+                <div>
+                  <div>[${moment(log.data_log).format('DD/MM/YYYY h:mm:ss')}] RAM: ${log.ram}MB disponível</div>
+                  <div>[${moment(log.data_log).format('DD/MM/YYYY h:mm:ss')}] CPU: ${log.cpu}%</div>
+                  <div>[${moment(log.data_log).format('DD/MM/YYYY h:mm:ss')}] DISCO: ${log.disco}MB disponível</div>
+                </div>
+                `
+        })
+      })
+    })
+
+
+
+
 
 }
