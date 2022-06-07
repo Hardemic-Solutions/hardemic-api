@@ -1,6 +1,5 @@
 const app = require("./app");
 const http = require("http");
-const { emit } = require("process");
 const Server = require("socket.io").Server;
 
 const httpServer = http.createServer(app);
@@ -11,20 +10,21 @@ const io = new Server(httpServer, {
 });
 
 let socketconectados = 0;
-const javasockets = [];
+let javasockets = [];
 io.on("connection", function (socket) {
   console.log(`socket conectado: ${socket.id}`);
 
-  socket.on("pegar_dados", (hostname) => {
-    javasockets.push({ ...hostname, id: socket.id });
+  socket.on("pegar_dados", (dados) => {
+    javasockets.push({ ...dados, id: socket.id });
 
     socketconectados++;
-    socket.broadcast.emit("followjava", hostname);
-    socket.broadcast.emit("exibirDadosConectados", socketconectados);
-    console.log(`quantidade de sockets conectados:${socketconectados}`);
+    socket.broadcast.emit("followjava", dados);
+    console.log("Device " + dados.hostname + " conectado!")
+    socket.broadcast.emit("exibirDadosConectados", javasockets);
+    console.log(`quantidade de sockets conectados:${javasockets.length || 0}`);
   });
-  io.emit("exibirDadosConectados", socketconectados);
-  console.log(`quantidade de sockets conectados:${socketconectados}`);
+  io.emit("exibirDadosConectados", javasockets);
+  console.log(`quantidade de sockets conectados:${javasockets.length || 0}`);
 
   socket.on("problema", function (problema) {
     console.log("problema", problema);
@@ -32,21 +32,25 @@ io.on("connection", function (socket) {
   });
 
   socket.on("disconnect", function (desmatch) {
+    console.log(`socket: ${socket.id} desconectado!`)
+
     const device = javasockets.find(javasocket => {
       return javasocket.id === socket.id
-
     })
-    console.log("device", device);
+
+    console.log('device', device)
+
     if (device) {
-      console.log(`o device: ${device.hostname} foi desconectado`)
       io.emit("unfollowjava", device.hostname);
-      socketconectados--;
 
+      console.log(`o device ${device.hostname} desconectado`)
+      javasockets = javasockets.filter(javasocket => {
+        return javasocket.id !== socket.id
+      })
 
-      console.log(`quantidade de sockets conectados:${socketconectados}`);
+      console.log(`quantidade de sockets conectados:${javasockets.length}`);
 
-      io.emit("exibirDadosConectados", socketconectados);
-
+      io.emit("exibirDadosConectados", javasockets);
     }
 
 
