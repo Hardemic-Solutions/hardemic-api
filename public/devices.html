@@ -267,14 +267,15 @@
     if (deviceAlreadyExists) {
       // alert("device existe")
       deviceAlreadyExists.status = "problema"
-      renderizarDevices(devices);
+
     } else {
       devices.push({
         hostname,
         status: "problema",
       });
-      renderizarDevices(devices);
     }
+
+    renderizarDevices(devices);
   });
 
   socket.on("followjava", ({ hostname }) => {
@@ -288,15 +289,14 @@
     if (deviceAlreadyExists) {
       // alert("device existe")
       deviceAlreadyExists.status = "conectado"
-      renderizarDevices(devices);
     } else {
-
       devices.push({
         hostname,
         status: "conectado",
       });
-      renderizarDevices(devices);
     }
+
+    renderizarDevices(devices);
   });
 
 
@@ -349,6 +349,7 @@
               status: "desconectado"
             }))
             renderizarDevices(devices);
+            socket.emit("dadosAtualizados")
           });
         } else {
           console.log("Houve um erro ao tentar realizar a obtencao de dados!");
@@ -368,7 +369,7 @@
     const box_devices = document.querySelector(".box_devices");
     box_devices.innerHTML = "";
 
-    console.log("devices log", devices);
+    console.log("devices", devices)
 
     devices.forEach((item, indice) => {
       box_devices.innerHTML += `
@@ -399,7 +400,7 @@
             </div>
         `;
 
-    socket.emit("dadosAtualizados")
+
   }
 
   // type, data e options
