@@ -258,11 +258,13 @@
       body: `Device ${hostname} conectado!`
     })
     const deviceAlreadyExists = devices.find(device => device.hostname === hostname)
+
     if (deviceAlreadyExists) {
       // alert("device existe")
       deviceAlreadyExists.status = "conectado"
       renderizarDevices(devices);
     } else {
+
       devices.push({
         hostname,
         status: "conectado",
