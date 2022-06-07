@@ -14,6 +14,10 @@ let javasockets = [];
 io.on("connection", function (socket) {
   console.log(`socket conectado: ${socket.id}`);
 
+  socket.on("dadosAtualizados", () => {
+    io.emit("dadosAtualizados", javasockets);
+  })
+
   socket.on("pegar_dados", (dados) => {
     javasockets.push({ ...dados, id: socket.id });
 

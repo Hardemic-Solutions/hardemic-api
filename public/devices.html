@@ -244,11 +244,37 @@
     document.getElementById("connection").innerHTML = dados.length;
   });
 
+  socket.on("dadosAtualizados", (dados) => {
+    let deviceExists;
+    dados.forEach(java => {
+      deviceExists = devices.find(device => device.hostname = java.hostname)
+
+      if (deviceExists) {
+        if (deviceExists.status !== "problema")
+          deviceExists.status = "conectado"
+      }
+    })
+
+    renderizarDevices(devices)
+  })
+
   socket.on("problema", (dados) => {
     // alert(dados.hostname);
     new Notification(`${dados.problema}`, {
       body: `Device ${dados.hostname} com problema`
     })
+    const deviceAlreadyExists = devices.find(device => device.hostname === dados.hostname)
+    if (deviceAlreadyExists) {
+      // alert("device existe")
+      deviceAlreadyExists.status = "problema"
+      renderizarDevices(devices);
+    } else {
+      devices.push({
+        hostname,
+        status: "problema",
+      });
+      renderizarDevices(devices);
+    }
   });
 
   socket.on("followjava", ({ hostname }) => {
@@ -370,6 +396,8 @@
                 </div>
             </div>
         `;
+
+    socket.emit("dadosAtualizados")
   }
 
   // type, data e options
