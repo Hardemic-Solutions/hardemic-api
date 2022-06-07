@@ -198,19 +198,25 @@
   let labels2 = [];
   let counterIndex = 0;
   let counterIndex2 = 0;
-  const socket = io("http://localhost:3333");
+  const socket = io("http://20.127.58.43:3333/");
   socket.on("exibirDadosConectados", (dados) => {
     document.getElementById("connection").innerHTML = dados;
   });
   socket.on("problema", (dados) => {
     alert(dados.hostname);
   });
-  socket.on("followjava", (hostname) => {
+  socket.on("followjava", ({hostname}) => {
     alert(hostname + " conectado");
-    devices.push({
-      hostname,
-      status: "conectado",
-    });
+    const deviceAlreadyExists = devices.find(device => device.hostname === hostname)
+    if(deviceAlreadyExists){
+      deviceAlreadyExists.status = "conectado"
+    }else{
+      devices.push({
+        hostname,
+        status: "conectado",
+      });
+    }
+    
     renderizarDevices();
   });
 
