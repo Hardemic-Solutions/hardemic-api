@@ -96,7 +96,6 @@ function deletar() {
 
 }
 
-
 function entrar() {
     // aguardar();
 
@@ -138,7 +137,7 @@ function entrar() {
 
                 sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.NOME_USUARIO = json.nome_usuario;
-                sessionStorage.ID_USUARIO = json.Id_usuario;
+                sessionStorage.ID_USUARIO = json.id_usuario;
                 sessionStorage.PERMISSAO = json.permissao
                 sessionStorage.ID_EMPRESA = json.fk_empresa;
 
