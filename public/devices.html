@@ -247,7 +247,8 @@
     alert(dados.hostname);
   });
 
-    socket.on("followjava", ({hostname}) => {
+  socket.on("followjava", ({hostname}) => {
+
     alert(hostname + " conectado");
     const deviceAlreadyExists = devices.find(device => device.hostname === hostname)
     if(deviceAlreadyExists){
@@ -700,5 +701,10 @@
   }
 
 
+
+
+  function meuPerfil() {
+    window.location = 'perfil.html';
+  }
 
 </script>
