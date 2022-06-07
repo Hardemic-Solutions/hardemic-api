@@ -61,38 +61,6 @@
             <div class="box_account">
                 <div class="account_left">
                     <div class="box_users">
-                        <!-- <div class="container_user">
-                            <div class="icon_user">
-                                <i class="fi fi-rr-user"></i>
-                            </div>
-                            <div id="informacoesUsuario" class="info_user">
-                                <span>Nome: ${item.nome_usuario}</span>
-                                <span>Email: ${item.email}</span>
-                                <span>Permissão: ${item.permissao}</span>
-                            </div>
-                            <div id="editaUsuario" class="edit_user">
-                                <input placeholder="Novo nome (opcional)" type="text" id="novoNomeUsuario">
-                                <input placeholder="Nova senha (opcional)" type="text" id="novaSenhaUsuario">
-                                <select name="permissaoSelect" id="valorNovaPermissao">
-                                    <option value="">Escolha a permissão do usuário</option>
-                                    <option value="suporte">Suporte</option>
-                                    <option value="admin">Admin</option>
-                                </select>
-                            </div>
-                            <div id="opcaoEditDelete" class="options_user">
-                                <i onclick="editarUsuario()"
-                                    class="fi fi-sr-pencil"></i>
-                                <i onclick="deletarUsuario()" class="fi fi-sr-trash"></i>
-                            </div>
-                            <div id="salvaMudancas" class="save_changes_user">
-                                <button onclick="cancelarNovoUsuario()">Cancelar</button>
-                                <button onclick="salvarAlteracoesUsuario()">Salvar alterações</button>
-                            </div>
-                        </div> -->
-
-                        <!-- BOTAO DE ADICIONAR -->
-
-                        <!-- FORMULARIO PARA ADICIONAR USUARIO -->
 
                     </div>
                 </div>
@@ -154,6 +122,13 @@
         btn_add_user.style.display = 'flex'
     }
 
+    function cancelarEditUsuario(idUsuario) {
+        document.getElementById(`informacoesUsuario_${idUsuario}`).style.display = 'flex'
+        document.getElementById(`opcaoEditDelete_${idUsuario}`).style.display = 'flex'
+        document.getElementById(`salvaMudancas_${idUsuario}`).style.display = 'none'
+        document.getElementById(`editaUsuario_${idUsuario}`).style.display = 'none'
+    }
+
     function cadastrarNovoUsuario(nome, email, senha, permissao) {
 
         if (!(nome == '' || email == '' || senha == '' || permissao == '')) {
@@ -195,13 +170,13 @@
 
         const dadosJaRegistrados = usuarios.find(usuario => usuario.id_usuario === idUsuario)
 
-        if (nomeNovo == null) {
+        if (nomeNovo == '') {
             nomeNovo = dadosJaRegistrados.nome_usuario
         }
-        if (senhaNova == null) {
+        if (senhaNova == '') {
             senhaNova = dadosJaRegistrados.senha
         }
-        if (permissaoNova == null) {
+        if (permissaoNova == '') {
             permissaoNova = dadosJaRegistrados.permissao
         }
 
@@ -354,8 +329,8 @@
                     <i onclick="deletarUsuario(${item.id_usuario})" class="fi fi-sr-trash"></i>
                 </div>
                 <div id="salvaMudancas_${item.id_usuario}" class="save_changes_user">
-                    <button onclick="cancelarNovoUsuario()">Cancelar</button>
-                    <button onclick="salvarAlteracoesUsuario(${item.id_usuario})">Salvar alterações</button>
+                    <button class="descarta_form" onclick="cancelarEditUsuario(${item.id_usuario})">Cancelar</button>
+                    <button class="salva_form" onclick="salvarAlteracoesUsuario(${item.id_usuario})">Salvar alterações</button>
                 </div>
             </div>  
             `;
