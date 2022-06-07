@@ -104,10 +104,11 @@
                 <textarea id="descRotina" type="text" rows="10"></textarea>
               </div>
               <div class="groupinput">
-                <label for="">Escolha um arquivo</label>
-                <span>
-                  <input id="arquivo" type="file"></input>
-                </span>
+                <label for="arquivo">Arquivo</label>
+
+                <label id="lblArquivo" class="upload" for="arquivo">Escolha um arquivo</label>
+
+                <input id="arquivo" onchange="previewFile(this.id)" type="file"></input>
               </div>
               <div>
                 <button onclick="adicionarRotina()" class="add_button" style="width: 100%;">Salvar</button>
@@ -137,10 +138,11 @@
                 <textarea id="editDescRotina" type="text" rows="10"></textarea>
               </div>
               <div class="groupinput">
-                <label for="">Escolha um arquivo</label>
-                <span>
-                  <input id="editArquivo" type="file"></input>
-                </span>
+                <label for="editArquivo">Arquivo</label>
+
+                <label class="upload" for="editArquivo">Escolha um arquivo</label>
+
+                <input id="editArquivo" onchange="previewFile(this.id)" style="display: none;" type="file"></input>
               </div>
               <div id="btn_editar">
               </div>
@@ -251,7 +253,11 @@
     }).catch(function (erro) {
       console.log(erro);
     });
+  }
 
+
+  function previewFile(id) {
+    lblArquivo.innerHTML = document.getElementById(id).files[0].name;
   }
 
 </script>
