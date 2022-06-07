@@ -225,7 +225,7 @@ function buscarInfoHardware(idComputador, local) {
 function renderizarInfoHardware(InfoHardware, local) {
   const boxDesc = document.querySelector(".box_desc_device");
 
-  fetch("http://localhost:3333/empresa/logs/" + InfoHardware[0].fk_computador)
+  fetch("/empresa/logs/" + InfoHardware[0].fk_computador)
     .then(res => {
       res.json().then(json => {
         console.log("JSON", json)
