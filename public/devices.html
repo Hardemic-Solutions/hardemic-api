@@ -250,7 +250,7 @@
   socket.on("followjava", ({hostname}) => {
 
     alert(hostname + " conectado");
-    const deviceAlreadyExists = devices.find(device => device.hostname === hostname)
+    const deviceAlreadyExists = devices.find(device => device.hostname === `${hostname}`)
     if(deviceAlreadyExists){
       document.getElementById(`status_${deviceAlreadyExists.id_computador}`).innerHTML = "conectado"
     }else{
