@@ -252,7 +252,7 @@
     alert(hostname + " conectado");
     const deviceAlreadyExists = devices.find(device => device.hostname === hostname)
     if(deviceAlreadyExists){
-      deviceAlreadyExists.status = "conectado"
+      document.getElementById(`status_${deviceAlreadyExists.id_computador}`).innerHTML = "conectado"
     }else{
       devices.push({
         hostname,
