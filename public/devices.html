@@ -238,21 +238,23 @@
   // variaveis para adicionar devies
   let devicesFuncAdicionar
 
-  const socket = io("http://20.127.58.43:3333/");
+  const socket = io("http://localhost:3333/");
 
   socket.on("exibirDadosConectados", (dados) => {
     document.getElementById("connection").innerHTML = dados.length;
   });
 
   socket.on("dadosAtualizados", (dados) => {
-    let deviceExists;
+    console.log("dados", dados)
     dados.forEach(java => {
-      deviceExists = devices.find(device => device.hostname = java.hostname)
+      let deviceExists = devices.find(device => device.hostname = java.hostname)
 
       if (deviceExists) {
-        if (deviceExists.status !== "problema")
+        if (deviceExists.status !== "problema") {
           deviceExists.status = "conectado"
+        }
       }
+
     })
 
     renderizarDevices(devices)

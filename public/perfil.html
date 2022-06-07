@@ -60,9 +60,9 @@
             </div>
             <div class="box_account">
                 <div class="account_left">
+                    <div class="box_users">
 
-
-
+                    </div>
                 </div>
                 <div class="account_right">
                     <div class="alterar_senha">
@@ -106,6 +106,132 @@
 </html>
 <script>
 
+    let usuarios = []
+
+    window.onload = function () {
+        listarUsuariosDoSistema()
+    }
+
+    function adicionarUsuario() {
+        container_add.style.display = 'flex'
+        btn_add_user.style.display = 'none'
+    }
+
+    function cancelarNovoUsuario() {
+        container_add.style.display = 'none'
+        btn_add_user.style.display = 'flex'
+    }
+
+    function cancelarEditUsuario(idUsuario) {
+        document.getElementById(`informacoesUsuario_${idUsuario}`).style.display = 'flex'
+        document.getElementById(`opcaoEditDelete_${idUsuario}`).style.display = 'flex'
+        document.getElementById(`salvaMudancas_${idUsuario}`).style.display = 'none'
+        document.getElementById(`editaUsuario_${idUsuario}`).style.display = 'none'
+    }
+
+    function cadastrarNovoUsuario(nome, email, senha, permissao) {
+
+        if (!(nome == '' || email == '' || senha == '' || permissao == '')) {
+            if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+                alert('Ops, email inválido!')
+            } else {
+                fetch('/usuarios/cadastrar', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nomeServer: nome,
+                        emailServer: email,
+                        senhaServer: senha,
+                        permissaoServer: permissao,
+                        empresaServer: sessionStorage.ID_EMPRESA,
+                    })
+                }).then(function (resposta) {
+                    if (resposta.ok) {
+                        window.alert("Cadastro realizado com sucesso!");
+                        window.location.reload()
+                        container_add.style.display = 'none'
+                        btn_add_user.style.display = 'flex'
+                    } else {
+                        throw ("Houve um erro ao tentar realizar o cadastro!");
+                    }
+                }).catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+            }
+        } else {
+            alert('Preencha todos os campos!')
+        }
+
+    }
+
+    function alterarDados(idUsuario, nomeNovo, senhaNova, permissaoNova) {
+
+        const dadosJaRegistrados = usuarios.find(usuario => usuario.id_usuario === idUsuario)
+
+        if (nomeNovo == '') {
+            nomeNovo = dadosJaRegistrados.nome_usuario
+        }
+        if (senhaNova == '') {
+            senhaNova = dadosJaRegistrados.senha
+        }
+        if (permissaoNova == '') {
+            permissaoNova = dadosJaRegistrados.permissao
+        }
+
+        fetch("/usuarios/alterardados/" + idUsuario, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nomeNovo,
+                senhaServer: senhaNova,
+                permissaoServer: permissaoNova,
+            })
+        }).then(function () {
+            alert('Usuário alterado com sucesso!');
+            location.reload();
+        }).catch(function (erro) {
+            console.log(erro);
+        });
+
+    }
+
+    function editarUsuario(idUsuario) {
+        document.getElementById(`editaUsuario_${idUsuario}`).style.display = 'flex'
+        document.getElementById(`salvaMudancas_${idUsuario}`).style.display = 'flex'
+        document.getElementById(`informacoesUsuario_${idUsuario}`).style.display = 'none'
+        document.getElementById(`opcaoEditDelete_${idUsuario}`).style.display = 'none'
+    }
+
+    function deletarUsuario(idUsuario) {
+        const resposta = window.confirm('Deseja deletar esse device?')
+        if (resposta) {
+            fetch("/usuarios/" + idUsuario, {
+                method: "DELETE"
+            }).then(function () {
+                alert('Usuário deletado com sucesso');
+                location.reload();
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+    }
+
+    function salvarAlteracoesUsuario(idUsuario) {
+        document.getElementById(`editaUsuario_${idUsuario}`).style.display = 'none'
+        document.getElementById(`salvaMudancas_${idUsuario}`).style.display = 'none'
+        document.getElementById(`informacoesUsuario_${idUsuario}`).style.display = 'flex'
+        document.getElementById(`opcaoEditDelete_${idUsuario}`).style.display = 'flex'
+
+        let novoNome = document.getElementById(`novoNomeUsuario_${idUsuario}`).value
+        let novaSenha = document.getElementById(`novaSenhaUsuario_${idUsuario}`).value
+        let NovaPermissao = document.getElementById(`valorNovaPermissao_${idUsuario}`).value
+        alterarDados(idUsuario, novoNome, novaSenha, NovaPermissao)
+    }
+
     function deleteAcc() {
         tittle_delete.innerHTML = 'Você tem certeza?';
         btn_delete.style.display = 'none';
@@ -116,6 +242,100 @@
         tittle_delete.innerHTML = 'Deseja excluir sua conta?';
         btn_delete.style.display = 'block';
         are_sure.style.display = 'none';
+    }
+
+    function listarUsuariosDoSistema() {
+        fetch("/usuarios/listar/" + sessionStorage.ID_EMPRESA, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then((json) => {
+                        console.log(json);
+                        usuarios = json
+                        renderizarUsuarios(usuarios)
+                    });
+                } else {
+                    console.log("Houve um erro ao tentar realizar a obtencao de dados!");
+                    resposta.text().then((texto) => {
+                        console.error(texto);
+                    });
+                }
+            })
+            .catch(function (erro) {
+                console.log(erro);
+            });
+        return false;
+    }
+
+    function renderizarUsuarios(usuarios) {
+        const box_usuarios = document.querySelector(".box_users");
+
+        box_usuarios.innerHTML = "";
+
+        box_usuarios.innerHTML += `
+            <div onclick="adicionarUsuario()" id="btn_add_user" class="add_user">
+                <i class="fi fi-rr-plus"></i>
+            </div>
+            <div id="container_add" class="box_adicionar_novo_user">
+                <div class="formulario_dados">
+                    <span>Nome </span>
+                    <input placeholder="Fulano da Silva" id="iptNome" type="text">
+                    <span>Eid </span>
+                    <input placeholder="fulano@email.com" id="iptEid" type="text">
+                </div>
+                <div class="formulario_dados">
+                    <span>Senha </span>
+                    <input placeholder="Digite a senha" type="password" id="iptSenha">
+                    <span>Permissão </span>
+                    <select id="permissaoAddSelect">
+                        <option value="suporte">Suporte</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="botoes_add_usuario">
+                    <button onclick="cancelarNovoUsuario()" class="descarta_form">Voltar</button>
+                    <button onclick="cadastrarNovoUsuario(iptNome.value, iptEid.value, iptSenha.value, permissaoAddSelect.value )"
+                        class="salva_form">Adicionar</button>
+                </div>
+            </div>
+        `;
+
+        usuarios.forEach((item, indice) => {
+            box_usuarios.innerHTML += `
+            <div class="container_user">
+                <div class="icon_user">
+                    <i class="fi fi-rr-user"></i>
+                </div>
+                <div id="informacoesUsuario_${item.id_usuario}" class="info_user">
+                    <span>Nome: ${item.nome_usuario}</span>
+                    <span>Email: ${item.email}</span>
+                    <span>Permissão: ${item.permissao}</span>
+                </div>
+                <div id="editaUsuario_${item.id_usuario}" class="edit_user">
+                    <input placeholder="Novo nome (opcional)" type="text" id="novoNomeUsuario_${item.id_usuario}">
+                    <input placeholder="Nova senha (opcional)" type="text" id="novaSenhaUsuario_${item.id_usuario}">
+                    <select id="valorNovaPermissao_${item.id_usuario}">
+                        <option value="">Escolha a permissão do usuário</option>
+                        <option value="suporte">Suporte</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div id="opcaoEditDelete_${item.id_usuario}" class="options_user">
+                    <i onclick="editarUsuario(${item.id_usuario})" class="fi fi-sr-pencil"></i>
+                    <i onclick="deletarUsuario(${item.id_usuario})" class="fi fi-sr-trash"></i>
+                </div>
+                <div id="salvaMudancas_${item.id_usuario}" class="save_changes_user">
+                    <button class="descarta_form" onclick="cancelarEditUsuario(${item.id_usuario})">Cancelar</button>
+                    <button class="salva_form" onclick="salvarAlteracoesUsuario(${item.id_usuario})">Salvar alterações</button>
+                </div>
+            </div>  
+            `;
+        });
+
     }
 
 </script>
