@@ -142,7 +142,7 @@ function entrar() {
                 sessionStorage.ID_EMPRESA = json.fk_empresa;
 
                 setTimeout(function () {
-                    window.location = "../dashboard.html";
+                    window.location = "../devices.html";
                 }, 1000); // apenas para exibir o loading
 
             });
