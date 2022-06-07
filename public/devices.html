@@ -238,7 +238,7 @@
   // variaveis para adicionar devies
   let devicesFuncAdicionar
 
-  const socket = io("http://localhost:3333/");
+  const socket = io("http://20.127.58.43:3333/");
 
   socket.on("exibirDadosConectados", (dados) => {
     document.getElementById("connection").innerHTML = dados.length;
