@@ -41,12 +41,34 @@ function buscarChamadosBanco() {
   return false;
 }
 
+function alterarTicket(idChamado) {
+  fetch("/empresa/" + sessionStorage.ID_EMPRESA + "/chamados/" + idChamado, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      status: selectTicket.value
+    })
+  })
+    .then(function (res) {
+      if (res.ok) {
+        location.reload();
+      }
+    })
+    .catch(function (erro) {
+      console.log(erro);
+    });
+}
+
 function renderizarChamados(chamados) {
   const rowDevices = document.querySelector(".tb_tickets");
 
   chamados.forEach((item, indice) => {
 
-    rowDevices.innerHTML += `
+    if (item.status == "PENDENTE") {
+
+      rowDevices.innerHTML += `
           <div class="rows_devices">
             <div class="box_info_devices">
               <h3>
@@ -69,9 +91,11 @@ function renderizarChamados(chamados) {
               </h3>
             </div>
             <div class="box_info_devices">
-              <h3>
-                ${item.status}
-              </h3>
+              <select id="selectTicket" onchange="alterarTicket(${item.id_chamado})">
+                <option selected="selected" value="PENDENTE">Pendente</option>
+                <option value="PROGRESSO">Progresso</option>
+                <option value="CONCLUIDO">Concluído</option>
+              </select>
             </div>
             <div onclick="buscarInfoHardware(${item.id_computador}, ${item.fk_sala})" class="box_info_devices">
               <h3>
@@ -81,6 +105,85 @@ function renderizarChamados(chamados) {
             </div>
           </div>
             `;
+    }else if (item.status == "PROGRESSO") {
+
+      rowDevices.innerHTML += `
+          <div class="rows_devices">
+            <div class="box_info_devices">
+              <h3>
+                ${item.id_chamado}
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
+                ${item.hostname}
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
+                ${item.nome_sala}
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
+                ${item.descricao}
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <select id="selectTicket" onchange="alterarTicket(${item.id_chamado})">
+                <option selected="selected" value="PROGRESSO">Progresso</option>
+                <option value="PENDENTE">Pendente</option>
+                <option value="CONCLUIDO">Concluído</option>
+              </select>
+            </div>
+            <div onclick="buscarInfoHardware(${item.id_computador}, ${item.fk_sala})" class="box_info_devices">
+              <h3>
+                Detalhes
+              </h3>
+              <i class="fi fi-rr-info"></i>
+            </div>
+          </div>
+            `;
+    } else if (item.status == "CONCLUIDO") {
+
+      rowDevices.innerHTML += `
+          <div class="rows_devices">
+            <div class="box_info_devices">
+              <h3>
+                ${item.id_chamado}
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
+                ${item.hostname}
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
+                ${item.nome_sala}
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <h3>
+                ${item.descricao}
+              </h3>
+            </div>
+            <div class="box_info_devices">
+              <select id="selectTicket" onchange="alterarTicket(${item.id_chamado})">
+                <option selected="selected" value="CONCLUIDO">Concluído</option>
+                <option value="PROGRESSO">Progresso</option>
+                <option value="PENDENTE">Pendente</option>
+              </select>
+            </div>
+            <div onclick="buscarInfoHardware(${item.id_computador}, ${item.fk_sala})" class="box_info_devices">
+              <h3>
+                Detalhes
+              </h3>
+              <i class="fi fi-rr-info"></i>
+            </div>
+          </div>
+            `;
+    }
   });
 };
 
@@ -121,7 +224,7 @@ function buscarInfoHardware(idComputador, local) {
 function renderizarInfoHardware(InfoHardware, local) {
   const boxDesc = document.querySelector(".box_desc_device");
 
-    boxDesc.innerHTML = `
+  boxDesc.innerHTML = `
       <div class="desc_header">
         <i onclick="showTickets()" class="fi fi-rr-arrow-left"></i>
         <h1>${InfoHardware[0].hostname}
