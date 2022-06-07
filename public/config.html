@@ -235,7 +235,7 @@
 <script>
   window.onload = () => {
     (() => {
-      fetch(`http://localhost:3333/empresa/${sessionStorage.ID_EMPRESA}/config`, {
+      fetch(`/empresa/${sessionStorage.ID_EMPRESA}/config`, {
         method: 'GET'
       }).then(response => {
         response.json().then(json => {
@@ -273,7 +273,7 @@
   const debounceUpdate = debounce(update, 1000)
 
   function update(idConfig, value, situacao) {
-    fetch(`http://localhost:3333/empresa/${sessionStorage.ID_EMPRESA}/config/${idConfig}`, {
+    fetch(`/empresa/${sessionStorage.ID_EMPRESA}/config/${idConfig}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
